@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    
+    <meta name="keywords" content="Life, ARIA, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Minug's Blog" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>iOS RunLoop | Minug's Blog</title>
+  </head>
+  <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Minug's Blog</a></h1>
+        <h2 class="subtitle"></h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/">首页</a></li>
+        
+        <li role="menuitem"><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/05/10/iOSRunLoop/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="XMinug">
+       <meta itemprop="description" content="">
+       <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">iOS RunLoop</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-05-10T00:00:00+08:00">2016-05-10 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h2 id="RunLoop"><a href="#RunLoop" class="headerlink" title="RunLoop"></a>RunLoop</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>runloop用来处理输入各种事项，例如鼠标，键盘事件，NSPort对象，NSConnection 对象，NSTimer对象。所有的触发事件，网络请求，异步回调等等</p>
+<p>开发者不能主动创建或者管理runloop，每个线程会主动创建一个runloop对象，如果需要调用runloop，需要使用currentRunloop获取即可。</p>
+<p>默认是每个线程具有一个runloop，但是不一定会被创建，当调用currentrunloop方法时，如果没有runloop对象，则会自动创建该对象。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</p>
+<p>NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。</p>
+<h3 id="NSRunLoop-线程不安全"><a href="#NSRunLoop-线程不安全" class="headerlink" title="NSRunLoop 线程不安全"></a>NSRunLoop 线程不安全</h3><p>由于nstimer对象并不被认为是input Source，在等待方法回调的时候可能会触发多次调用。</p>
+<p>NSRunloop并不是线程安全的，并且runloop相关的方法，只能在runloop所在线程调用，永远不要再其他线程调用不属于这个线程的方法。<br>不过CFRunloop是线程安全的。</p>
+<h4 id="performSelector"><a href="#performSelector" class="headerlink" title="performSelector"></a>performSelector</h4><p>performSelector 方法包含在Runloop中。</p>
+<p>该方法会创建一个timer对象，然后在合适的runloop模式中，执行传入的方法。所以这个方法，会将传入的参数进行一个retain操作。然后在执行之前就return了。</p>
+<p>PerformSelecter<br>当调用 NSObject 的 performSelecter:afterDelay: 后，实际上其内部会创建一个 Timer 并添加到当前线程的 RunLoop 中。所以如果当前线程没有 RunLoop，则这个方法会失效。</p>
+<p>当调用 performSelector:onThread: 时，实际上其会创建一个 Timer 加到对应的线程去，同样的，如果对应线程没有 RunLoop 该方法也会失效。<br>在该线程的下一次runloop循环中调用</p>
+<h3 id="CFRunLoop-线程安全"><a href="#CFRunLoop-线程安全" class="headerlink" title="CFRunLoop 线程安全"></a>CFRunLoop 线程安全</h3><blockquote>
+<p>runloop中包含的三个对象。</p>
+<blockquote>
+<p>CFRunloopSource </p>
+<p>CFRunloopTimer </p>
+<p>CFRunloopObserver</p>
+</blockquote>
+</blockquote>
+<p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响。</p>
+<p>如果一个 mode 中一个 item 都没有，则 RunLoop 会直接退出，不进入循环。</p>
+<p>能够主动为runloop添加观察者，不过需要使用cfrunloop中的API.需要先得到cfrunloop，属于core foundation框架中。<br>core foundation 是用c语言写的一套框架，foundation与cf之间能够通过桥接进行类型转换。cf框架对象中的生命周期不受arc管理，需要开发者自己管理，主动进行retain和release操作。<br>如果你添加了一个port在多种模式下，如果需要移除，则分别从多个模式下独立移除</p>
+<p>如果需要实现回调，需要先创建上述的某一个对象置于runloop中，然后由runloop 在合适的时间进行回调。<br>每个添加到runloop中对象，必须设定好运行的模式。每一个运行中的runloop，都具有特定的模式，同时也只处理对应模式的观察者，定时器和源事件。<br>不过，由于runloop的模式只是简单的一个string类型，所以你可以直接自己定义runloop类型。也可以将你自定义的类型添加到common类型中。</p>
+<p>runloop只有在该模式下，有至少一个源或者定时器去处理，才能运行。<br>sourcees或者timer 能够阻止runloop的退出。</p>
+<p>通过runloop处理事件，循环，维持应用不退出。<br>cfrunloop中提供了管理timer，observer，source的接口<br>runloop本身是递归的，可以在一个runloop里面再添加一个runloop。</p>
+<p>runloop运行事件处理器来响应输入事件，runloop接受两种不同类型的源。Input source ，传递异步事件，一般是来自其余线程或者不同应用的消息。Timer source 传递同步事件，在预定的时间调用或者重复调用。这两种源都使用特定的应用处理来处理事件。<br>Input source 传递同步事件后，会调用runUntilDate方法，去跳出。Timer source传递事件后，不会造成runloop的退出。</p>
+<h4 id="Input-source"><a href="#Input-source" class="headerlink" title="Input source"></a>Input source</h4><p>包含两种source ，Port-based , Custom input source .<br>一般这两个source的处理是不需要做区别的，它们之间唯一的区别就是，Port-baced 由内核创建提出，而custom 由其余线程创建提出。<br>当你创建一个source的时候，你需要将它给与你runloop的某一种模式。模式将决定input source 如何被监视。大多数时候，runloop将处在默认模式下，不过你也可以指定自定义模式。</p>
+<h4 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h4><p>timer并不是真正的时间机制。就像input source，timer只与指定的模式关联。如果不在对应的模式中，timer并不会工作，直到你把模式切换回允许工作的模式。<br>你也可以配置timer只执行一次或者重复地。不过定时器不是真正的定时，如果一个定时器设定在某个时间后，隔5秒执行一次，如果定时器错过了一个或者多次的执行，它会为错过的时间执行一次，然后重新进行隔5秒执行。</p>
+<h4 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h4><p>The entrance to the run loop.<br>When the run loop is about to process a timer.<br>When the run loop is about to process an input source.<br>When the run loop is about to go to sleep.<br>When the run loop has woken up, but before it has processed the event that woke it up.<br>The exit from the run loop.</p>
+<p>Similar to timers, run-loop observers can be used once or repeatedly. A one-shot observer removes itself from the run loop after it fires, while a repeating observer remains attached</p>
+<p>观察者只能在core foundation中创建，而不是cocoa 应用</p>
+<h4 id="Runloop-events"><a href="#Runloop-events" class="headerlink" title="Runloop events"></a>Runloop events</h4><p>Notify observers that the run loop has been entered.</p>
+<p>Notify observers that any ready timers are about to fire.</p>
+<p>Notify observers that any input sources that are not port based are about to fire.</p>
+<p>Fire any non-port-based input sources that are ready to fire.</p>
+<p>If a port-based input source is ready and waiting to fire, process the event immediately. Go to step 9.</p>
+<p>Notify observers that the thread is about to sleep.</p>
+<p>Put the thread to sleep until one of the following events occurs:</p>
+<p>An event arrives for a port-based input source.<br>A timer fires.</p>
+<p>The timeout value set for the run loop expires.</p>
+<p>The run loop is explicitly woken up.</p>
+<p>Notify observers that the thread just woke up.</p>
+<p>Process the pending event.</p>
+<p>If a user-defined timer fired, process the timer event and restart the loop. Go to step 2.</p>
+<p>If an input source fired, deliver the event.</p>
+<p>If the run loop was explicitly woken up but has not yet timed out, restart the loop. Go to step 2.</p>
+<p>Notify observers that the run loop has exited.</p>
+<p><img src="/media/runloopEvents.png" alt="runloop Event"></p>
+<h3 id="Runloop的应用"><a href="#Runloop的应用" class="headerlink" title="Runloop的应用"></a>Runloop的应用</h3><p>1.使用source来与其他线程进行通信</p>
+<p>2.在线程中使用定时器</p>
+<p>3.在应用中使用performSelector方法</p>
+<p>4.保持线程去执行周期任务</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/2016/04/21/LearningHTTP/" rel="next" title="HTTP基础概念笔记"><i class="fas fa-angle-left"></i><span class="nav-title">HTTP基础概念笔记</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/2016/08/01/14817252088642/" rel="prev" title="内存管理的两种实现"><span class="nav-title">内存管理的两种实现</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/avatar.png" alt="XMinug">
+  
+  <h1 class="author-name">XMinug</h1>
+  <h2 class="author-description"></h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">13</a></div>
+    </div>
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#RunLoop"><span class="toc-text">RunLoop</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#简述"><span class="toc-text">简述</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#NSRunLoop-线程不安全"><span class="toc-text">NSRunLoop 线程不安全</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#performSelector"><span class="toc-text">performSelector</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#CFRunLoop-线程安全"><span class="toc-text">CFRunLoop 线程安全</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#Input-source"><span class="toc-text">Input source</span></a></li><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#Timer"><span class="toc-text">Timer</span></a></li><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#Observer"><span class="toc-text">Observer</span></a></li><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#Runloop-events"><span class="toc-text">Runloop events</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#Runloop的应用"><span class="toc-text">Runloop的应用</span></a></li></ol></li></ol></div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接<p></p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:youremail@youremailhost" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-link"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author">XMinug</span><span class="year"><i class="far fa-copyright"></i>2018</span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="far fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

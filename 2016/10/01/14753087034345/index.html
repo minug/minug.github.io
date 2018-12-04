@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    
+    <meta name="keywords" content="Life, ARIA, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Minug's Blog" type="application/atom+xml">
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/atom-one-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    <script defer src="/js/busuanzi.pure.mini.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>UITableview中cell自适应高度 | Minug's Blog</title>
+  </head>
+  <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Minug's Blog</a></h1>
+        <h2 class="subtitle"></h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    <nav id="nav" class="nav">
+      <a id="nav-toggle" class="nav-toggle" aria-hidden="true"><i class="fas fa-bars" aria-label="切换导航栏"></i></a>
+      <ul id="menu" role="menubar" aria-hidden="false">
+        
+        <li role="menuitem"><a href="/">首页</a></li>
+        
+        <li role="menuitem"><a href="/archives/">归档</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="page">
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/01/14753087034345/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="XMinug">
+       <meta itemprop="description" content="">
+       <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">UITableview中cell自适应高度</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-10-01T00:00:00+08:00">2016-10-01 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h1 id="UITableview中cell自适应高度"><a href="#UITableview中cell自适应高度" class="headerlink" title="UITableview中cell自适应高度"></a>UITableview中cell自适应高度</h1><p>由于UITableview中cell展示时，会先调用其代理方法中的，<strong>- tableView:heightForRowAtIndexPath:</strong> 方法，来确定该cell的高度，然后再调用tableview的datasource方法，来创建展示该cell。对于一些类似聊天界面的tableview，我们不能返回一个固定的高度，需要先根据model里面的数据来计算这个cell的高度。</p>
+<p><strong>第一种做法</strong>是根据data计算cell内视图的frame并手动布局界面。我一般的做法是在<strong>原来model的基础上再添加出一个frameModel层，</strong>作为隔离。因为model层只需要知道其本身内的数据，不需要具体了解具体展示其数据的cell的视图的布局规则。从另一个角度来说，同一个数据可能展示在不同的界面中，可能需要计算的frame也不同，所以不能把这个计算给写死在model层中。</p>
+<p>这么做的优点是，<br><strong>1.</strong>计算量比autolayout要小。由于autolayout的计算是根据界面的布局，屏幕尺寸来进行实时的计算，并将重新排布视图。而我们手动的计算，我们可以添加一个缓存，来确保具体的布局计算只有一次。由于可以减少计算量，所以界面的流畅程度会比autolayout快一点。</p>
+<p>但是缺点也是存在的，<br><strong>1.</strong>由于所有的计算需要我们手动来计算，代码的复杂度明显增加了。更加难维护了。因为需要另外抽出一个frameModel层，需要在这个对象里面手动添加计算的代码。如果需要自定义高度的cell很多的话，代码量上会增加很多。另外，<strong>这个frameModel需要知道cell中具体的视图布局规则，等于与cell直接耦合。如果以后需要修改cell的视图布局，则需要同时修改两处代码。</strong></p>
+<p><strong>2.</strong>手动计算不能很好的支持横竖屏的切换。或者说，在写布局代码的时候，需要分别写入两套计算规则。而自动布局只需要根据界面的比例值来计算即可。</p>
+<p><strong>第二种做法</strong>使用autolayout来自动布局。在ios8的时候，推出了<strong>self-sizing</strong>的概念，即对于例如UILabel，UIButton本身的高度可以根据里面的数据内容来撑开，即会有一个自身的高度存在。因此我们可以根据这个特性，利用autolayout来给cell设置约束，然后给cell传入数据后，让cell来自动布局，然后cell就会被”撑开”，我们就可以直接得到cell被撑开后的height，这个height我们需要在代理中返回的数据。<br>具体可以调用的就是</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FDTemplateLayoutCell框架基于这个概念来实现ios开发中UITableView中cell高度计算。</p>
+<p>简单调用的步骤即，</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">    return [tableView fd_heightForCellWithIdentifier:@&quot;identifer&quot; cacheByIndexPath:indexPath configuration:^(id cell) &#123;</span><br><span class="line">        // 配置 cell 的数据源，和 &quot;cellForRow&quot; 干的事一致，比如：</span><br><span class="line">        cell.entity = self.feedEntities[indexPath.row];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单查看了一下框架中具体实现代码，<br>首先这是一个UITableview的分类，所以可以直接以tableview的形式来调用，而不用创建其他的对象。</p>
+<p>首先根据cell的identifer和runtime来给tableview持有一个cell对象数组。这个cell对象不用于具体的展示，只是用来方便计算cellHeight。</p>
+<p>每当具体调用到代理方法返回高度的时候，我们就可以传入一个identifer得到一个已regist过的cell，然后给cell来传入model数据。<strong>cell得到数据后，我们手动调用其自动布局的方法，得到通过autolayout计算得出的cellheight</strong>。</p>
+<p>这么做的优点就是，在计算的时候不需要手动提前先计算cellHeight，也就不需要frameModel这个对象。代码更加简洁了。但是，每一次滑动tableview的时候，都会调用代理方法，我们需要重新计算一次cellHeight。<strong>而autolayout的计算量又远远大于手动计算</strong>，在流畅度上来说，体验远远差于手动计算。所以FDTemplateLayoutCell又提出了一个缓存的方法。可以根据indexPath或者key来实现数据的高度的缓存，如果第二次传入相同的key时，则直接返回缓存的数据，而不再重新计算。</p>
+<p><strong>key的简单缓存做法即使用mutableDictionary来实现即可。</strong></p>
+<p>讲一下使用indexpath来实现的缓存机制。<br>我们知道，在tableview中，刷新之后，可能原先indexpath对应的model即会出现新的变化，如果近简单的根据indexpath来进行数据缓存，则容易出现错位的情况。</p>
+<p>主要的原理就是，通过分类覆写了UITableview的load方法，在load方法中，通过runtime将tableview的insert，reloadData等方法给hook成自己的方法。然后在替换的方法中手动管理indexpath变量。</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ (void)load &#123;</span><br><span class="line">    // All methods that trigger height cache&apos;s invalidation</span><br><span class="line">    SEL selectors[] = &#123;</span><br><span class="line">        @selector(reloadData),</span><br><span class="line">        @selector(insertSections:withRowAnimation:),</span><br><span class="line">        @selector(deleteSections:withRowAnimation:),</span><br><span class="line">        @selector(reloadSections:withRowAnimation:),</span><br><span class="line">        @selector(moveSection:toSection:),</span><br><span class="line">        @selector(insertRowsAtIndexPaths:withRowAnimation:),</span><br><span class="line">        @selector(deleteRowsAtIndexPaths:withRowAnimation:),</span><br><span class="line">        @selector(reloadRowsAtIndexPaths:withRowAnimation:),</span><br><span class="line">        @selector(moveRowAtIndexPath:toIndexPath:)</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    for (NSUInteger index = 0; index &lt; sizeof(selectors) / sizeof(SEL); ++index) &#123;</span><br><span class="line">        SEL originalSelector = selectors[index];</span><br><span class="line">        SEL swizzledSelector = NSSelectorFromString([@&quot;fd_&quot; stringByAppendingString:NSStringFromSelector(originalSelector)]);</span><br><span class="line">        Method originalMethod = class_getInstanceMethod(self, originalSelector);</span><br><span class="line">        Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);</span><br><span class="line">        method_exchangeImplementations(originalMethod, swizzledMethod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>个人意见，在使用FDTemplateLayoutCell的使用确实可以简化我们在不同高度的cell计算。同时，为了避免多次重复的计算，应该开启缓存机制。更好的是通过key来实现缓存。即可以根据model中的各个data生成一个哈希值作为key来缓存height，当data发生变化的时候，其哈希值也会变化，即可以促使tableview来重新计算数据。</p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      
+      <a href="/2016/09/21/14743567013398/" rel="next" title="彩票业务学习与竞品分析"><i class="fas fa-angle-left"></i><span class="nav-title">彩票业务学习与竞品分析</span></a>
+      
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      
+      <a href="/2016/10/02/14753895285815/" rel="prev" title="iOS开发相关内容"><span class="nav-title">iOS开发相关内容</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </nav>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="搜索" class="form-control">
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/avatar.png" alt="XMinug">
+  
+  <h1 class="author-name">XMinug</h1>
+  <h2 class="author-description"></h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">归档</div>
+      <div><a href="/archives/">13</a></div>
+    </div>
+    
+    
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+    
+    
+    
+    <hr>
+    <div class="post-toc sidebar-item" id="toc-div">
+      <div><i class="fas fa-list-ol"></i>文章目录</div>
+      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-1"><a class="list-group-item toc-link" href="#UITableview中cell自适应高度"><span class="toc-text">UITableview中cell自适应高度</span></a></li></ol></div>
+    </div>
+    
+    
+    
+    <hr>
+    <div class="social-link sidebar-item">
+      <div><i class="far fa-address-card"></i>社交链接<p></p></div>
+      <ul>
+        
+        <li><i class="fas fa-envelope"></i><a href="mailto:youremail@youremailhost" target="_blank">E-Mail</a></li>
+        
+        <li><i class="fab fa-github"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+        
+      </ul>
+    </div>
+    
+    
+    <hr>
+    <div class="blogroll sidebar-item">
+      <div><i class="fas fa-link"></i>友情链接</div>
+      <ul>
+        
+        <li><i class="fas fa-link"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
+        
+        <li><i class="fas fa-link"></i><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></li>
+        
+      </ul>
+    </div>
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <button id="back-to-top"><i class="fas fa-angle-double-up" aria-label="回到顶部"></i></button>
+    </div>
+    <div class="footer-container">
+      <div class="footer-left">
+        <div class="copyright">
+          <span class="author">XMinug</span><span class="year"><i class="far fa-copyright"></i>2018</span>
+        </div>
+        
+        <div class="busuanzi">
+          <span id="busuanzi_container_site_pv"><i class="fas fa-eye" aria-label="站点点击量" aria-hidden="false"></i><span id="busuanzi_value_site_pv"></span></span><span id="busuanzi_container_site_uv"><i class="fas fa-user" aria-label="站点用户数" aria-hidden="false"></i><span id="busuanzi_value_site_uv"></span></span><span id="busuanzi_container_page_pv"><i class="far fa-file-alt"></i><span id="busuanzi_value_page_pv" aria-label="页面点击量" aria-hidden="false"></span></span>
+        </div>
+        
+      </div>
+      <div class="footer-right">
+        <div class="custom-info">
+          
+          托管于<i class="fab fa-github-alt"></i><a href="https://pages.github.com/" target="_blank">GitHub Pages</a>
+          
+        </div>
+        <div class="powered-by">
+          由 <a href="https://hexo.io/" target="_blank">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
