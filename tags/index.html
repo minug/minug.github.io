@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head><meta name="generator" content="Hexo 3.8.0">
@@ -83,7 +84,7 @@
     <script defer type="text/javascript" src="/js/index.js"></script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <title>2016暑期实习总结 | Minug's Blog</title>
+    <title>标签 | Minug's Blog</title>
   </head>
   <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
     
@@ -106,7 +107,7 @@
         
         <li role="menuitem"><a href="/">首页</a></li>
         
-        <li role="menuitem"><a href="/tags/">标签</a></li>
+        <li role="menuitem"><a href="/tags/" class="current">标签</a></li>
         
         <li role="menuitem"><a href="/about/">关于</a></li>
         
@@ -121,93 +122,23 @@
         <div class="main-container">
           <div class="content">
             
-<div id="post" class="page">
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/09/12/14738707951975/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-       <meta itemprop="name" content="XMinug">
-       <meta itemprop="description" content="">
-       <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-       <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
+<div id="tags" class="tags page">
+  <article class="article post card">
     <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">2016暑期实习总结</h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-09-12T00:00:00+08:00">2016-09-12 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
+      <h1 class="post-title" itemprop="name headline">标签</h1>
     </header>
-    <main class="post-main" itemprop="articleBody">
-      <h3 id="实习总结"><a href="#实习总结" class="headerlink" title="实习总结"></a>实习总结</h3><p>在来电中心度过了两个月的实习期。总结一下实习过程中的一些所感所受与技术上的内容提升。</p>
-<h4 id="关于团队合作"><a href="#关于团队合作" class="headerlink" title="关于团队合作"></a>关于团队合作</h4><p>1，<strong>代码管理工具</strong>，团队主要使用的代码管理工具是SVN，加上分支开发的模式。</p>
-<p>相比较之前使用的git，svn不是分布式的，所以没有本地仓库一说。等于说是大家所有提交的代码都保存在服务器上，需要查看提交记录的话，需要联网查看实时的全部记录，而不是类似git可以现在本地进行提交，然后再统一的push操作。</p>
-<p>另外，对于一些需要忽略的文件，git是通过添加.gitignore文件来实现的，而svn，则是通过一些管理软件来实现的提交文件忽略，例如cornerstone就提供了这个功能。</p>
-<p>svn上开出新的分支，则会将所有的文件拷贝出一份新文件，如果项目较大，并且有较多分支在存在的话，占用的硬盘空间是很可观的。例如tim的svn服务器上大概有5，6个分支和几个release的分支，每个工程大概占用里2G的空间。这些合起来，最后总共占用了接近20个G的空间。其中有相当一部分的文件都是完全一致的。</p>
-<p>2，<strong>关于分支开发</strong>。大的需求开新分支操作，并且会保留一个开关。通过一个变量或者宏来控制新功能的开启与否。<br>或者如果考虑到一些临时性的功能开发，可以使用宏的形式，在后续需要删除的时候可以通过这些宏来快速定位代码位置。</p>
-<p>3，新需求开发的主要流程，需求定制，宣讲，开发，产品体验，测试，合流。</p>
-<p>4，<strong>关于一些开源库的使用</strong>。总的来说还是会在研究过源码的基础上，根据自己项目的一些业务需求进行一些个性化的定制，删除不必要的模块。</p>
-<p>这个可能还是说需要仁者见仁智者见智了。</p>
-<p>将开源库植入自己的应用中，主要原因就是因为需要使用到这个库所提供的功能。如果人手足够的话，抽空根据自己的项目进行一些个性化功能的订制优化，去除一些其他功能，对项目安装包或者性能都会有所帮助。可以直接下载源码后运行。</p>
-<p>不过，如果没有时间进行一些源码级别的优化之类的话，可能使用cocoapods来管理第三方的库比较方便，因为开发者也会对自己的库进行一些优化。</p>
-<p>5，<strong>内存泄露检测</strong>，动态与静态。</p>
-<p>ios中的内存检测，主要还是简单分为了两类，</p>
-<p>一个是动态内存检测，在应用运行过程中，根据控制器来检测。相对于Instruments，在debug环境下，如果产生内存泄露，可以直接弹框说明出现了内存泄露。主要检测原理是，判断依据是，认为当某个控制器被pop之后，其持有的变量与视图应该会被销毁。不过这样也会出现误报的情况。假设我们需要对某个控制器的视图进行缓存的话，就会出现误报的情况。</p>
-<p>二是，通过静态代码扫描来检测。主要判断原理是mrc环境下的代码编写原则，在alloc或者new的下方，则同时应该配有一个release或者autorelease，在retain操作的下方也应该有一个release操作。</p>
-<p>不过当我们编写程序的时候，没有根据这个原则来编写，则也会出现误报的情况。</p>
-<p>扫描出来的问题主要有如下问题，</p>
-<ol>
-<li>bad release，即出现了二次释放，在该方法中的对一个不是通过new，copy，alloc出来的对象进行了release操作，则判断为bad release。</li>
-<li>memory leak，通过alloc或者copy出来的对象在该方法的下方没有release操作。或者在方法中在if语句中提前return，而没有释放之前创建的对象。</li>
-<li>nil parameter。创建了一个指针指向空对象，然后赋值。但是最后没有做边界判断，导致如果需要将这个指针的对象传入一个array或者dict中的话，就会出现传入一个空指针的情况。</li>
-</ol>
-<p>6，<strong>ipv6适配相关</strong>，会出现的问题与解决思路</p>
-<p>7，<strong>安装包裁剪</strong>的主要思路。</p>
-<ol>
-<li>将工程中不需要的图片资源删除。</li>
-<li>然后根据业务逻辑删除一些不再使用的功能。</li>
-<li>重构重复的代码</li>
-<li>将arc文件转换为mrc文件，可以稍微减少一点安装包的增量。</li>
-<li>不要为了一点小功能就引入一个大的开源库。</li>
-</ol>
-<p>9，热修复注意事项。JS-Patch，通过加密算法来实现脚本传输过程中的安全事项。</p>
-
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
+    <main class="post-main">
+      <h2 class="page-counter">
         
-        <a class="post-tag button" href="/tags/实习总结/" rel="tag"><i class="fas fa-tags"></i>实习总结</a>
+        你已经创建了 5 个标签！
         
+      </h2>
+      <div class="tags-cloud">
+        <a href="/tags/Net/" style="font-size: 24px; color: #444">Net</a> <a href="/tags/iOS/" style="font-size: 32px; color: #111">iOS</a> <a href="/tags/实习总结/" style="font-size: 16px; color: #777">实习总结</a> <a href="/tags/彩票业务/" style="font-size: 16px; color: #777">彩票业务</a> <a href="/tags/面试/" style="font-size: 24px; color: #444">面试</a>
       </div>
-      
-    </footer>
+    </main>
+    <footer class="post-footer"></footer>
   </article>
-  
-  
-  <nav class="page-nav">
-    <div class="page-nav-next page-nav-item">
-      
-      <a href="/2016/08/01/14817252088642/" rel="next" title="内存管理的两种实现"><i class="fas fa-angle-left"></i><span class="nav-title">内存管理的两种实现</span></a>
-      
-    </div>
-    <div class="page-nav-prev page-nav-item">
-      
-      <a href="/2016/09/21/14743567013398/" rel="prev" title="彩票业务学习与竞品分析"><span class="nav-title">彩票业务学习与竞品分析</span><i class="fas fa-angle-right"></i></a>
-      
-    </div>
-  </nav>
-  
-  
 </div>
 
           </div>
@@ -250,17 +181,6 @@
 
 
   <div class="sidebar-sticky">
-    
-    
-    
-    
-    
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#实习总结"><span class="toc-text">实习总结</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-4"><a class="list-group-item toc-link" href="#关于团队合作"><span class="toc-text">关于团队合作</span></a></li></ol></li></ol></div>
-    </div>
-    
     
     
     <hr>
@@ -328,3 +248,5 @@
 
   </body>
 </html>
+
+

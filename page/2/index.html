@@ -106,7 +106,9 @@
         
         <li role="menuitem"><a href="/">首页</a></li>
         
-        <li role="menuitem"><a href="/archives/">归档</a></li>
+        <li role="menuitem"><a href="/tags/">标签</a></li>
+        
+        <li role="menuitem"><a href="/about/">关于</a></li>
         
       </ul>
     </nav>
@@ -121,182 +123,6 @@
             
 
 <div id="index" class="index page">
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/09/12/14738707951975/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/09/12/14738707951975/" itemprop="url">2016暑期实习总结</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-09-12T00:00:00+08:00">2016-09-12 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h3 id="实习总结"><a href="#实习总结" class="headerlink" title="实习总结"></a>实习总结</h3><p>在来电中心度过了两个月的实习期。总结一下实习过程中的一些所感所受与技术上的内容提升。</p>
-<h4 id="关于团队合作"><a href="#关于团队合作" class="headerlink" title="关于团队合作"></a>关于团队合作</h4><p>1，<strong>代码管理工具</strong>，团队主要使用的代码管理工具是SVN，加上分支开发的模式。</p>
-<p>相比较之前使用的git，svn不是分布式的，所以没有本地仓库一说。等于说是大家所有提交的代码都保存在服务器上，需要查看提交记录的话，需要联网查看实时的全部记录，而不是类似git可以现在本地进行提交，然后再统一的push操作。</p>
-<p>另外，对于一些需要忽略的文件，git是通过添加.gitignore文件来实现的，而svn，则是通过一些管理软件来实现的提交文件忽略，例如cornerstone就提供了这个功能。</p>
-<p>svn上开出新的分支，则会将所有的文件拷贝出一份新文件，如果项目较大，并且有较多分支在存在的话，占用的硬盘空间是很可观的。例如tim的svn服务器上大概有5，6个分支和几个release的分支，每个工程大概占用里2G的空间。这些合起来，最后总共占用了接近20个G的空间。其中有相当一部分的文件都是完全一致的。</p>
-<p>2，<strong>关于分支开发</strong>。大的需求开新分支操作，并且会保留一个开关。通过一个变量或者宏来控制新功能的开启与否。<br>或者如果考虑到一些临时性的功能开发，可以使用宏的形式，在后续需要删除的时候可以通过这些宏来快速定位代码位置。</p>
-<p>3，新需求开发的主要流程，需求定制，宣讲，开发，产品体验，测试，合流。</p>
-<p>4，<strong>关于一些开源库的使用</strong>。总的来说还是会在研究过源码的基础上，根据自己项目的一些业务需求进行一些个性化的定制，删除不必要的模块。</p>
-<p>这个可能还是说需要仁者见仁智者见智了。</p>
-<p>将开源库植入自己的应用中，主要原因就是因为需要使用到这个库所提供的功能。如果人手足够的话，抽空根据自己的项目进行一些个性化功能的订制优化，去除一些其他功能，对项目安装包或者性能都会有所帮助。可以直接下载源码后运行。</p>
-<p>不过，如果没有时间进行一些源码级别的优化之类的话，可能使用cocoapods来管理第三方的库比较方便，因为开发者也会对自己的库进行一些优化。</p>
-<p>5，<strong>内存泄露检测</strong>，动态与静态。</p>
-<p>ios中的内存检测，主要还是简单分为了两类，</p>
-<p>一个是动态内存检测，在应用运行过程中，根据控制器来检测。相对于Instruments，在debug环境下，如果产生内存泄露，可以直接弹框说明出现了内存泄露。主要检测原理是，判断依据是，认为当某个控制器被pop之后，其持有的变量与视图应该会被销毁。不过这样也会出现误报的情况。假设我们需要对某个控制器的视图进行缓存的话，就会出现误报的情况。</p>
-<p>二是，通过静态代码扫描来检测。主要判断原理是mrc环境下的代码编写原则，在alloc或者new的下方，则同时应该配有一个release或者autorelease，在retain操作的下方也应该有一个release操作。</p>
-<p>不过当我们编写程序的时候，没有根据这个原则来编写，则也会出现误报的情况。</p>
-<p>扫描出来的问题主要有如下问题，</p>
-<ol>
-<li>bad release，即出现了二次释放，在该方法中的对一个不是通过new，copy，alloc出来的对象进行了release操作，则判断为bad release。</li>
-<li>memory leak，通过alloc或者copy出来的对象在该方法的下方没有release操作。或者在方法中在if语句中提前return，而没有释放之前创建的对象。</li>
-<li>nil parameter。创建了一个指针指向空对象，然后赋值。但是最后没有做边界判断，导致如果需要将这个指针的对象传入一个array或者dict中的话，就会出现传入一个空指针的情况。</li>
-</ol>
-<p>6，<strong>ipv6适配相关</strong>，会出现的问题与解决思路</p>
-<p>7，<strong>安装包裁剪</strong>的主要思路。</p>
-<ol>
-<li>将工程中不需要的图片资源删除。</li>
-<li>然后根据业务逻辑删除一些不再使用的功能。</li>
-<li>重构重复的代码</li>
-<li>将arc文件转换为mrc文件，可以稍微减少一点安装包的增量。</li>
-<li>不要为了一点小功能就引入一个大的开源库。</li>
-</ol>
-<p>9，热修复注意事项。JS-Patch，通过加密算法来实现脚本传输过程中的安全事项。</p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/实习总结/" rel="tag"><i class="fas fa-tags"></i>实习总结</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/08/01/14817266761435/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/08/01/14817266761435/" itemprop="url">autorelease 的实现</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p>
-<p>实际调用结果等同于</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在 NSAutoreleasePool 内部，具体实现为</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p>
-<p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p>
-<p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p>
-<p>而由系统来维护的autoreasepool则会在runtim的运行过程中不断的创建与销毁，来实现内部变量的释放</p>
-<p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/08/01/14817252088642/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/08/01/14817252088642/" itemprop="url">内存管理的两种实现</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h4 id="内存管理的两种实现"><a href="#内存管理的两种实现" class="headerlink" title="内存管理的两种实现"></a>内存管理的两种实现</h4><h5 id="通过内存块头部管理引用计数"><a href="#通过内存块头部管理引用计数" class="headerlink" title="通过内存块头部管理引用计数"></a>通过内存块头部管理引用计数</h5><p>将引用计数保存在对象占用的块头部变量中。<br>即实现一个结构体</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct obj_layout &#123;</span><br><span class="line">char	padding[__BIGGEST_ALIGNMENT__ - ((UNP % __BIGGEST_ALIGNMENT__)</span><br><span class="line">  ? (UNP % __BIGGEST_ALIGNMENT__) : __BIGGEST_ALIGNMENT__)];</span><br><span class="line">NSUInteger	retained;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在结构体中保存当前这个变量的引用计数。</p>
-<h5 id="通过计数引用表来实现计数管理"><a href="#通过计数引用表来实现计数管理" class="headerlink" title="通过计数引用表来实现计数管理"></a>通过计数引用表来实现计数管理</h5><p>而通过对Foundation框架的逆向，可以发现苹果的实现是通过计数表来保存每个实例变量的引用计数。</p>
-<p>在计数表中，每个内存对象地址为键值，指向一个计数值。</p>
-<h4 id="两种计数方式的对比："><a href="#两种计数方式的对比：" class="headerlink" title="两种计数方式的对比："></a>两种计数方式的对比：</h4><p>1，通过内存块头部管理引用计数，<br>代码简单，不用维护一个计数表。<br>可以统一管理引用技术的内存与对象的内存块。负责计数的内存块与对象本身的内存块是在一起的。</p>
-<p>2，通过哈希表实现引用计数，<br>在创建分配内存块的时候不需要考虑内存块头部的分配<br>哈希表中有记录各个内存块的地址，可以通过这个追溯到各个具体的实例变量。</p>
-<p>在实际调试的过程中，只要计数表没有被破坏，可以很方便的通过引用计数表来追踪各个对象的计数。<br>同时，统一管理计数的时候，不需要考虑由于单个内存块出现故障，导致该内存对象的计数值丢失的问题。</p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
-        
-      </div>
-      
-    </footer>
-  </article>
   
   <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-block">
@@ -850,9 +676,285 @@
     </footer>
   </article>
   
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/04/17/4_17_Tecent/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2016/04/17/4_17_Tecent/" itemprop="url">腾讯即通产品部 iOS面试</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-17T00:00:00+08:00">2016-04-17 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h3 id="2016-4-17-Tecent-iOS面试"><a href="#2016-4-17-Tecent-iOS面试" class="headerlink" title="2016.4.17_Tecent iOS面试"></a>2016.4.17_Tecent iOS面试</h3><h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ol>
+<li>TCP与UDP的区别</li>
+<li>TCP握手</li>
+<li>HTTP首部</li>
+</ol>
+<h4 id="IOS相关"><a href="#IOS相关" class="headerlink" title="IOS相关"></a>IOS相关</h4><ol start="4">
+<li>GCD介绍，多线程解决方案与进程通信相关</li>
+<li>ARC解释</li>
+</ol>
+<h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol start="6">
+<li>数据库范式</li>
+<li>手写数据库注入范例</li>
+<li>数据库防止注入方案</li>
+</ol>
+<h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><ol start="9">
+<li>DES加密</li>
+</ol>
+<h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol start="10">
+<li>C++变量声明周期</li>
+</ol>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ol start="11">
+<li>手写链表结构与增删改查操作</li>
+</ol>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/面试/" rel="tag"><i class="fas fa-tags"></i>面试</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/04/01/网易面试总结/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2016/04/01/网易面试总结/" itemprop="url">网易春招实习面试</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-04-01T00:00:00+08:00">2016-04-01 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h2 id="http缓存"><a href="#http缓存" class="headerlink" title="http缓存"></a>http缓存</h2><p>304状态码 Not Modify</p>
+<p>通过http协议头进行缓存控制，cache-control。</p>
+<p>服务器会返回设置相关的缓存控制信息，例如缓存时间max-age，缓存内容标记tag，控制是否缓存等信息。</p>
+<p>if-None-Match 中有ETag令牌，由服务器检查是否资源被修改。如果未改变，由服务器返回304 Not Modify 状态码。目标是尽可能减少向服务器的数据请求，减少带宽压力。</p>
+<p>使用一致的网址：如果您在不同的网址上提供相同的内容，将会多次获取和存储该内容。提示：注意，网址区分大小写！</p>
+<p>确保服务器提供验证令牌 (ETag)：通过验证令牌，如果服务器上的资源未被更改，就不必传输相同的字节。</p>
+<p>确定中继缓存可以缓存哪些资源：对所有用户的响应完全相同的资源很适合由 CDN 或其他中继缓存进行缓存。</p>
+<p>确定每个资源的最优缓存周期：不同的资源可能有不同的更新要求。审查并确定每个资源适合的 max-age。</p>
+<p>确定网站的最佳缓存层级：对 HTML 文档组合使用包含内容指纹码的资源网址以及短时间或 no-cache 的生命周期，可以控制客户端获取更新的速度。</p>
+<p>搅动最小化：有些资源的更新比其他资源频繁。如果资源的特定部分（例如 JavaScript 函数或一组 CSS 样式）会经常更新，应考虑将其代码作为单独的文件提供。这样，每次获取更新时，剩余内容（例如不会频繁更新的库代码）可以从缓存中获取，确保下载的内容量最少。</p>
+<p><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn" target="_blank" rel="noopener">https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=zh-cn</a><br><a href="http://www.cnblogs.com/TankXiao/archive/2012/11/28/2793365.html#noverify" target="_blank" rel="noopener">http://www.cnblogs.com/TankXiao/archive/2012/11/28/2793365.html#noverify</a></p>
+<p>http Cookie <a href="http://www.cnblogs.com/fish-li/archive/2011/07/03/2096903.html" target="_blank" rel="noopener">http://www.cnblogs.com/fish-li/archive/2011/07/03/2096903.html</a></p>
+<h3 id="https-三次握手。SSL交换密钥"><a href="#https-三次握手。SSL交换密钥" class="headerlink" title="https 三次握手。SSL交换密钥"></a>https 三次握手。SSL交换密钥</h3><p>端口443 。https就是在http的基础上添加了ssl加密协议，利用密钥交换协议进行了密钥交换<br>具体分析。。。<br>验证CA证书。<br><a href="http://www.freebuf.com/articles/system/37900.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/system/37900.html</a></p>
+<h3 id="http2-0"><a href="#http2-0" class="headerlink" title="http2.0"></a>http2.0</h3><h3 id="http代理"><a href="#http代理" class="headerlink" title="http代理"></a>http代理</h3><p>HTTP的代理服务器即是Web服务器又是Web客户端。<br><a href="http://www.cnblogs.com/TankXiao/archive/2012/12/12/2794160.html" target="_blank" rel="noopener">http://www.cnblogs.com/TankXiao/archive/2012/12/12/2794160.html</a></p>
+<p>HTTP协议是无状态的，对于一个浏览器发出的多次请求，WEB服务器无法区分 是不是来源于同一个浏览器。 因此需要cookie的实现。<br>cookie与session的区别。<br>http Cookie的实现，字符串保存于浏览器中<br>可以利用cookie保存少量数据，使用数据序列化分方式。<br>session是基于cookie实现的。<br>cookie安全。</p>
+<h3 id="libcap抓包原理"><a href="#libcap抓包原理" class="headerlink" title="libcap抓包原理"></a>libcap抓包原理</h3><p>libpcap的包捕获机制就是在数据链路层加一个旁路处理。当一个数据包到达网络接口时，libpcap首先利用已经创建的Socket从链路层驱动程序中获得该数据包的拷贝，再通过Tap函数将数据包发给BPF过滤器。BPF过滤器根据用户已经定义好的过滤规则对数据包进行逐一匹配，匹配成功则放入内核缓冲区，并传递给用户缓冲区，匹配失败则直接丢弃。如果没有设置过滤规则，所有数据包都将放入内核缓冲区，并传递给用户层缓冲区。<br>其实pcap的应用程序格式很简单，总的来说可以可以分为以下5部分：<br>1.我们从决定用哪一个接口进行嗅探开始。在Linux中，这可能是eth0，而在BSD系统中则可能是xl1等等。我们也可以用一个字符串来定义这个设备，或者采用pcap提供的接口名来工作。<br>2.初始化pcap。在这里我们要告诉pcap对什么设备进行嗅探。假如愿意的话，我们还可以嗅探多个设备。怎样区分它们呢？使用 文件句柄。就像打开一个文件进行读写一样，必须命名我们的嗅探“会话”，以此使它们各自区别开来。<br>3.假如我们只想嗅探特定的传输（如TCP/IP包，发往端口23的包等等），我们必须创建一个规则集合，编译并且使用它。这个过程分为三个相互紧密关联的阶段。规则集合被置于一个字符串内，并且被转换成能被pcap读的格式(因此编译它)。编译实际上就是在我们的程序里调用一个不被外部程序使用的函数。接下来我们要告诉 pcap使用它来过滤出我们想要的那一个会话。<br>4.最后，我们告诉pcap进入它的主体执行循环。在这个阶段内pcap一直工作到它接收了所有我们想要的包为止。每当它收到一个包就调用另一个已经定义好的函数，这个函数可以做我们想要的任何工作，它可以剖析所部获的包并给用户打印出结果，它可以将结果保存为一个文件，或者什么也不作。<br>5.在嗅探到所需的数据后，我们要关闭会话并结束。<br><a href="http://blog.csdn.net/stoneliul/article/details/8615105" target="_blank" rel="noopener">http://blog.csdn.net/stoneliul/article/details/8615105</a></p>
+<h3 id="git分支操作"><a href="#git分支操作" class="headerlink" title="git分支操作"></a>git分支操作</h3><p>$ git branch xxx<br>$ git checkout xxx</p>
+<h3 id="runtime底层实现。"><a href="#runtime底层实现。" class="headerlink" title="runtime底层实现。"></a>runtime底层实现。</h3><p>runtime相关，运行时的所有类，对象。<br>关于变量，属性，协议，方法，消息转发等<br>消息的返回类型，参量类型<br>运行时，工程加载的所有二进制库或者framework等等<br>能够动态修改指针的强弱<br>可以通过runtime创建不是继承于NSObject 的OC 根对象</p>
+<h2 id="手机端网络分层对应情况"><a href="#手机端网络分层对应情况" class="headerlink" title="手机端网络分层对应情况"></a>手机端网络分层对应情况</h2><h2 id="arc底层机制，即C实现原理。c的内存管理实现。"><a href="#arc底层机制，即C实现原理。c的内存管理实现。" class="headerlink" title="arc底层机制，即C实现原理。c的内存管理实现。"></a>arc底层机制，即C实现原理。c的内存管理实现。</h2>
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/面试/" rel="tag"><i class="fas fa-tags"></i>面试</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/03/21/tcpip/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2016/03/21/tcpip/" itemprop="url">OSI</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-03-21T00:00:00+08:00">2016-03-21 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h1 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h1><h4 id="OSI参考模型网络层、子层和层分组"><a href="#OSI参考模型网络层、子层和层分组" class="headerlink" title="OSI参考模型网络层、子层和层分组"></a>OSI参考模型网络层、子层和层分组</h4><p>第一层是最具体的，处理了实际的网络硬件和从一台设备到另一台设备发送比特的特定方法。第二层处理的依旧是信令和硬件。随着到了第3，4层，变得越来越抽象，等到了应用层，就不再处理硬件或者操作系统的概念了。</p>
+<h4 id="PDU和SDU"><a href="#PDU和SDU" class="headerlink" title="PDU和SDU"></a>PDU和SDU</h4><p>PDU，协议数据单元</p>
+<p>SDU，服务数据单元</p>
+<p>每个协议会生成一个供传输的PDU，该数据就是下一层的SDU。</p>
+<p>PDU就是上层协议内容，加上本层的协议头。</p>
+<h3 id="中间设备"><a href="#中间设备" class="headerlink" title="中间设备"></a>中间设备</h3><p>中间设备在物理层接受报文，然后报文被上传到数据链路层，在这里被处理，检错等，且数据链路层的首部被剥去，处理后的分组被向上传递到网络层。在那里，网络层判断目的机器是不是在本地网络上，或分组是否需要被转发到另一个中间设备。然后被重新打包成报文，向下返回到数据链路层，等待继续发送</p>
+<p>报文沿着OSI模型向上只到网络层，然后重新被打包，沿着线路在物理层发送。</p>
+<h1 id="OSI层次作用"><a href="#OSI层次作用" class="headerlink" title="OSI层次作用"></a>OSI层次作用</h1><blockquote>
+<p>应用层</p>
+<p>表示层</p>
+<p>会话层</p>
+<p>运输层</p>
+<p>网络层</p>
+<p>数据链路层</p>
+<p>物理层</p>
+</blockquote>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>唯一的数据通过网络接口物理移动的层次。所以其他层执行生成报文的功能，这些报文实现各种协议。但是最终，报文必须沿着协议栈向下运输到物理层，并最终通过网络发送出去。</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>数据链路层在概念上分为两个子层，逻辑链路层LLC和媒体访问层MAC。</p>
+<h4 id="LLC"><a href="#LLC" class="headerlink" title="LLC"></a>LLC</h4><p>网络上本地设备之间逻辑链路的建立和控制所需要的功能。</p>
+<h4 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h4><p>控制对网络媒体访问的程序。</p>
+<h4 id="数据成帧"><a href="#数据成帧" class="headerlink" title="数据成帧"></a>数据成帧</h4><p>将较高层次的报文最终封装成可以在网络物理层发送的帧。</p>
+<h4 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h4><p>实现对MAC地址的寻址。</p>
+<h4 id="差错检测与处理"><a href="#差错检测与处理" class="headerlink" title="差错检测与处理"></a>差错检测与处理</h4><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层参与从一台计算机到另一台计算机实际获取数据的最底层。一般而言，数据链路层只处理彼此相邻的本地设备。</p>
+<h4 id="逻辑寻址"><a href="#逻辑寻址" class="headerlink" title="逻辑寻址"></a>逻辑寻址</h4><p>IP协议，尽可能为每一个设备分配一个唯一的逻辑地址。在逻辑层次的寻址；数据链路层是针对物理层的寻址。</p>
+<h4 id="数据报封装"><a href="#数据报封装" class="headerlink" title="数据报封装"></a>数据报封装</h4><h4 id="分片与重组"><a href="#分片与重组" class="headerlink" title="分片与重组"></a>分片与重组</h4><p>如果需要发送的数据太大超过了数据链路层的最大限制，网络层需要将数据划分成片，并把每片交给数据链路层。</p>
+<h4 id="差错处理和诊断"><a href="#差错处理和诊断" class="headerlink" title="差错处理和诊断"></a>差错处理和诊断</h4><p>针对网络层的差错处理和检错</p>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>运输层担当较高层的应用的抽象领域和1-3层具体功能的联络者。</p>
+<p>主要负责端对端的运输。</p>
+<h4 id="进程级寻址"><a href="#进程级寻址" class="headerlink" title="进程级寻址"></a>进程级寻址</h4><p>对端口级别的寻址，寻址需要发送到对方的某个应用程序。</p>
+<h4 id="多路复用和分解"><a href="#多路复用和分解" class="headerlink" title="多路复用和分解"></a>多路复用和分解</h4><h4 id="分片，打包和重组"><a href="#分片，打包和重组" class="headerlink" title="分片，打包和重组"></a>分片，打包和重组</h4><p>对较大报文的分片</p>
+<h4 id="连接建立，管理和终止"><a href="#连接建立，管理和终止" class="headerlink" title="连接建立，管理和终止"></a>连接建立，管理和终止</h4><h4 id="确认和重传"><a href="#确认和重传" class="headerlink" title="确认和重传"></a>确认和重传</h4><p>运输层是实现可靠数据交付协议的地方。最通常的做法就是通过结合确认和重传定时器来实现。</p>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><h1 id="TCP-IP各层次常用协议"><a href="#TCP-IP各层次常用协议" class="headerlink" title="TCP/IP各层次常用协议"></a>TCP/IP各层次常用协议</h1><table>
+<thead>
+<tr>
+<th>网络接口层</th>
+<th>点到点协议</th>
+<th>PPP</th>
+<th>提供第二层连接。提供鉴别，数据封装，加密和聚合等功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>地址解析协议</td>
+<td>ARP</td>
+<td>将IP地址转换为MAC地址</td>
+</tr>
+<tr>
+<td><strong>网际层</strong></td>
+<td>网际协议</td>
+<td>IP，IPV6</td>
+<td>提供对运输层报文的封装，无连接交付，寻址和选路功能</td>
+</tr>
+<tr>
+<td></td>
+<td>IP网络地址转换</td>
+<td>IP NAT</td>
+<td>将专用网络中的地址自动转换成公用网络中的不同地址</td>
+</tr>
+<tr>
+<td></td>
+<td>互联网控制报文</td>
+<td>ICMP</td>
+<td>IP和IPV6协议的支持协议。一般用于ping命令</td>
+</tr>
+<tr>
+<td><strong>运输层</strong></td>
+<td>传输控制协议</td>
+<td>TCP</td>
+<td>提供可靠连接的协议，具有流量控制功能</td>
+</tr>
+<tr>
+<td></td>
+<td>用户数据报协议</td>
+<td>UDP</td>
+<td>提供无连接协议，效率较高</td>
+</tr>
+<tr>
+<td><strong>应用层</strong></td>
+<td>域名系统</td>
+<td>DNS</td>
+<td>将域名转换为IP地址</td>
+</tr>
+<tr>
+<td></td>
+<td>动态主机配置协议</td>
+<td>DHCP</td>
+<td>用来配置TCP/IP设备并管理IP地址的协议</td>
+</tr>
+<tr>
+<td></td>
+<td>文件传输协议</td>
+<td>FTP</td>
+<td>文件传输，明文形式传送用户名和密码</td>
+</tr>
+<tr>
+<td></td>
+<td>超文本传输协议</td>
+<td>HTTP</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>TELNET协议</td>
+<td>Telnet</td>
+<td>建立远程机器的终端会话</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/Net/" rel="tag"><i class="fas fa-tags"></i>Net</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fas fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
   
   
@@ -880,12 +982,13 @@
   <h2 class="author-description"></h2>
   <div class="site-count">
     
-    <div class="archives-count">
-      <div class="site-count-title">归档</div>
-      <div><a href="/archives/">13</a></div>
+    
+    
+    
+    <div class="tags-count">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">5</a></div>
     </div>
-    
-    
     
   </div>
   
@@ -904,11 +1007,9 @@
       <div><i class="far fa-address-card"></i>社交链接<p></p></div>
       <ul>
         
-        <li><i class="fas fa-envelope"></i><a href="mailto:youremail@youremailhost" target="_blank">E-Mail</a></li>
+        <li><i class="fas fa-envelope"></i><a href="" target="_blank">xminug#gmail.com</a></li>
         
-        <li><i class="fab fa-github"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
-        
-        <li><i class="fab fa-weibo"></i><a href="https://weibo.com/" target="_blank">Weibo</a></li>
+        <li><i class="fab fa-github"></i><a href="https://github.com/minug" target="_blank">GitHub</a></li>
         
       </ul>
     </div>
@@ -919,11 +1020,7 @@
       <div><i class="fas fa-link"></i>友情链接</div>
       <ul>
         
-        <li><i class="fas fa-link"></i><a href="https://github.com/" target="_blank">GitHub</a></li>
-        
-        <li><i class="fas fa-link"></i><a href="https://developer.mozilla.org/" target="_blank">MDN</a></li>
-        
-        <li><i class="fas fa-link"></i><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks</a></li>
+        <li><i class="fas fa-link"></i><a href="https://minug.github.io/" target="_blank">GitHub</a></li>
         
       </ul>
     </div>

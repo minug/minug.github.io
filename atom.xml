@@ -40,29 +40,6 @@
   </entry>
   
   <entry>
-    <title>iOS常见内存泄露错误</title>
-    <link href="https://minug.github.io/2016/10/02/14754103000423/"/>
-    <id>https://minug.github.io/2016/10/02/14754103000423/</id>
-    <published>2016-10-01T16:00:00.000Z</published>
-    <updated>2018-12-04T03:18:11.553Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="iOS常见内存泄露错误"><a href="#iOS常见内存泄露错误" class="headerlink" title="iOS常见内存泄露错误"></a>iOS常见内存泄露错误</h4><p><strong>常见内存错误</strong><br><strong>1.</strong>memory leak</p><p>一般情况是，在某个方法的中通过new或者alloc，copy，create出一个新的对象之后，没有在该方法的最下方进行release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSObject *obj = [[NSObject alloc] init];</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>2.</strong>bad release</p><p>在某个方法的对不是通过new或者alloc，copy，create创建的新对象进行了一次release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func:(NSObject*)obj&#123;</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    [obj release];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>3.</strong>nil argument</p><p>对NSArray或者NSDictionary对象传入一个空指针。在代码中首先创建了一个某类型的空指针，然后在下面的switch或者ifelse中对指针赋值。然后将对象传入一个字典或者数组中。如果没有做default判断，然后将一个nil指针传入array中，造成crash</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSString *s = nil;</span><br><span class="line">    switch Type&#123;</span><br><span class="line">        case 1:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 3:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    NSArray *a = @[s];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;iOS常见内存泄露错误&quot;&gt;&lt;a href=&quot;#iOS常见内存泄露错误&quot; class=&quot;headerlink&quot; title=&quot;iOS常见内存泄露错误&quot;&gt;&lt;/a&gt;iOS常见内存泄露错误&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;常见内存错误&lt;/strong&gt;&lt;br&gt;&lt;strong
-      
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>iOS开发相关内容</title>
     <link href="https://minug.github.io/2016/10/02/14753895285815/"/>
     <id>https://minug.github.io/2016/10/02/14753895285815/</id>
@@ -76,6 +53,29 @@
       
       
         &lt;h2 id=&quot;iOS开发相关内容&quot;&gt;&lt;a href=&quot;#iOS开发相关内容&quot; class=&quot;headerlink&quot; title=&quot;iOS开发相关内容&quot;&gt;&lt;/a&gt;iOS开发相关内容&lt;/h2&gt;&lt;h4 id=&quot;数据层&quot;&gt;&lt;a href=&quot;#数据层&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS常见内存泄露错误</title>
+    <link href="https://minug.github.io/2016/10/02/14754103000423/"/>
+    <id>https://minug.github.io/2016/10/02/14754103000423/</id>
+    <published>2016-10-01T16:00:00.000Z</published>
+    <updated>2018-12-04T03:18:11.553Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="iOS常见内存泄露错误"><a href="#iOS常见内存泄露错误" class="headerlink" title="iOS常见内存泄露错误"></a>iOS常见内存泄露错误</h4><p><strong>常见内存错误</strong><br><strong>1.</strong>memory leak</p><p>一般情况是，在某个方法的中通过new或者alloc，copy，create出一个新的对象之后，没有在该方法的最下方进行release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSObject *obj = [[NSObject alloc] init];</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>2.</strong>bad release</p><p>在某个方法的对不是通过new或者alloc，copy，create创建的新对象进行了一次release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func:(NSObject*)obj&#123;</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    [obj release];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>3.</strong>nil argument</p><p>对NSArray或者NSDictionary对象传入一个空指针。在代码中首先创建了一个某类型的空指针，然后在下面的switch或者ifelse中对指针赋值。然后将对象传入一个字典或者数组中。如果没有做default判断，然后将一个nil指针传入array中，造成crash</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSString *s = nil;</span><br><span class="line">    switch Type&#123;</span><br><span class="line">        case 1:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 3:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    NSArray *a = @[s];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;iOS常见内存泄露错误&quot;&gt;&lt;a href=&quot;#iOS常见内存泄露错误&quot; class=&quot;headerlink&quot; title=&quot;iOS常见内存泄露错误&quot;&gt;&lt;/a&gt;iOS常见内存泄露错误&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;常见内存错误&lt;/strong&gt;&lt;br&gt;&lt;strong
       
     
     </summary>
@@ -156,29 +156,6 @@
   </entry>
   
   <entry>
-    <title>autorelease 的实现</title>
-    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
-    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
-    <published>2016-07-31T16:00:00.000Z</published>
-    <updated>2018-12-04T03:17:54.036Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runtim的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
-      
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>内存管理的两种实现</title>
     <link href="https://minug.github.io/2016/08/01/14817252088642/"/>
     <id>https://minug.github.io/2016/08/01/14817252088642/</id>
@@ -192,6 +169,29 @@
       
       
         &lt;h4 id=&quot;内存管理的两种实现&quot;&gt;&lt;a href=&quot;#内存管理的两种实现&quot; class=&quot;headerlink&quot; title=&quot;内存管理的两种实现&quot;&gt;&lt;/a&gt;内存管理的两种实现&lt;/h4&gt;&lt;h5 id=&quot;通过内存块头部管理引用计数&quot;&gt;&lt;a href=&quot;#通过内存块头部管理引用计
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>autorelease 的实现</title>
+    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
+    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
+    <published>2016-07-31T16:00:00.000Z</published>
+    <updated>2018-12-04T03:17:54.036Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runtim的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
       
     
     </summary>
