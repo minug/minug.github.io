@@ -173,6 +173,58 @@
   
   <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2019/03/30/todo/RSA 原理/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/03/30/todo/RSA 原理/" itemprop="url">RSA 原理</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-30T00:00:00+08:00">2019-03-30 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h1 id="RSA-原理"><a href="#RSA-原理" class="headerlink" title="RSA 原理"></a>RSA 原理</h1><p>N = 323;17*19 = 323 私钥</p>
+<p>L = 144;16 18 最小公倍数 144</p>
+<p>E = 5; 1&lt;E&lt;L &amp;&amp; gcd(E,L) =1</p>
+<p>公钥(E,N) = (5,323)<br>私钥 (D,N) = (29,323) 5*29mode144 = 1</p>
+<p>明文 20</p>
+<p>密文为 20^5===323 == 39</p>
+<p>反算 39^29===323</p>
+<p>305 * 286 === 323 = 20</p>
+<p>N = 31<em>37 = 1147<br>L = 30</em>36=5<em>6</em>6 = 180<br>E = 17 D = 53</p>
+<p>明文20<br>密文 20^17mod1147 == </p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/算法/" rel="tag"><i class="fas fa-tags"></i>算法</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://minug.github.io/2019/03/30/todo/iOS Block学习/">
       <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
         <meta itemprop="name" content="XMinug">
@@ -223,58 +275,6 @@
       <div class="post-tags">
         
         <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2019/03/30/todo/RSA 原理/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2019/03/30/todo/RSA 原理/" itemprop="url">RSA 原理</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-03-30T00:00:00+08:00">2019-03-30 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h1 id="RSA-原理"><a href="#RSA-原理" class="headerlink" title="RSA 原理"></a>RSA 原理</h1><p>N = 323;17*19 = 323 私钥</p>
-<p>L = 144;16 18 最小公倍数 144</p>
-<p>E = 5; 1&lt;E&lt;L &amp;&amp; gcd(E,L) =1</p>
-<p>公钥(E,N) = (5,323)<br>私钥 (D,N) = (29,323) 5*29mode144 = 1</p>
-<p>明文 20</p>
-<p>密文为 20^5===323 == 39</p>
-<p>反算 39^29===323</p>
-<p>305 * 286 === 323 = 20</p>
-<p>N = 31<em>37 = 1147<br>L = 30</em>36=5<em>6</em>6 = 180<br>E = 17 D = 53</p>
-<p>明文20<br>密文 20^17mod1147 == </p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/算法/" rel="tag"><i class="fas fa-tags"></i>算法</a>
         
       </div>
       
@@ -465,7 +465,7 @@
   
   <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/02/14753895285815/">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/02/14753087875883/">
       <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
         <meta itemprop="name" content="XMinug">
         <meta itemprop="description" content="">
@@ -477,7 +477,7 @@
     </div>
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/10/02/14753895285815/" itemprop="url">iOS开发相关内容</a>
+        <a class="post-title-link post-title-link-external" href="/2016/10/02/14753087875883/" itemprop="url">ios小技巧</a>
       </h1>
       <div class="post-meta">
         
@@ -491,13 +491,18 @@
     </header>
     <main class="post-main" itemprop="articleBody">
       
-      <h2 id="iOS开发相关内容"><a href="#iOS开发相关内容" class="headerlink" title="iOS开发相关内容"></a>iOS开发相关内容</h2><h4 id="数据层"><a href="#数据层" class="headerlink" title="数据层"></a>数据层</h4><p>数据库持久化操作<br>fmdb,realm</p>
-<h4 id="UI层"><a href="#UI层" class="headerlink" title="UI层"></a>UI层</h4><p>UITableview中自适应cell高度<a href="14753087034345.md">UITableview中cell自适应高度</a></p>
-<p>轮播图实现,使用UICollectionView或者多个ImageView加上scrollView来展示。</p>
-<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><p>网络访问</p>
-<h4 id="运营维护"><a href="#运营维护" class="headerlink" title="运营维护"></a>运营维护</h4><p>热更新<br>崩溃日志定位</p>
-<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p><a href="14754103000423.md">iOS常见内存泄露错误</a></p>
-<h4 id="ios程序编译与逆向"><a href="#ios程序编译与逆向" class="headerlink" title="ios程序编译与逆向"></a>ios程序编译与逆向</h4><p>编译脚本</p>
+      <h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure>
+<p><strong>2.</strong> JS中实现的消息转发</p>
+<p><strong>3.</strong>关键字typeof()</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure>
+<p><strong>4.</strong>objectForKeyedSubscript:</p>
+<p>实现了这个方法，就能以 a[key] 的形式来取值。</p>
+<p><strong>5.</strong></p>
+<pre><code>#if !__has_feature(objc_arc)
+#error  does not support Objective-C Automatic Reference Counting (ARC)
+#endif
+</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>
 
       
     </main>

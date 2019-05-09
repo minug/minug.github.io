@@ -20,23 +20,6 @@
     </entry>
     
     <entry>
-      <title>iOS Block学习</title>
-      <link href="/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
-      <url>/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> iOS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>RSA 原理</title>
       <link href="/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/"/>
       <url>/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/</url>
@@ -48,6 +31,23 @@
         <tags>
             
             <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>iOS Block学习</title>
+      <link href="/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
             
         </tags>
       
@@ -122,6 +122,23 @@
     </entry>
     
     <entry>
+      <title>ios小技巧</title>
+      <link href="/2016/10/02/14753087875883/"/>
+      <url>/2016/10/02/14753087875883/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>iOS开发相关内容</title>
       <link href="/2016/10/02/14753895285815/"/>
       <url>/2016/10/02/14753895285815/</url>
@@ -144,23 +161,6 @@
       <url>/2016/10/02/14754103000423/</url>
       
         <content type="html"><![CDATA[<h4 id="iOS常见内存泄露错误"><a href="#iOS常见内存泄露错误" class="headerlink" title="iOS常见内存泄露错误"></a>iOS常见内存泄露错误</h4><p><strong>常见内存错误</strong><br><strong>1.</strong>memory leak</p><p>一般情况是，在某个方法的中通过new或者alloc，copy，create出一个新的对象之后，没有在该方法的最下方进行release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSObject *obj = [[NSObject alloc] init];</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>2.</strong>bad release</p><p>在某个方法的对不是通过new或者alloc，copy，create创建的新对象进行了一次release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func:(NSObject*)obj&#123;</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    [obj release];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>3.</strong>nil argument</p><p>对NSArray或者NSDictionary对象传入一个空指针。在代码中首先创建了一个某类型的空指针，然后在下面的switch或者ifelse中对指针赋值。然后将对象传入一个字典或者数组中。如果没有做default判断，然后将一个nil指针传入array中，造成crash</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSString *s = nil;</span><br><span class="line">    switch Type&#123;</span><br><span class="line">        case 1:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 3:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    NSArray *a = @[s];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> iOS </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>ios小技巧</title>
-      <link href="/2016/10/02/14753087875883/"/>
-      <url>/2016/10/02/14753087875883/</url>
-      
-        <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
       
       
       
@@ -224,11 +224,11 @@
     </entry>
     
     <entry>
-      <title>autorelease 的实现</title>
-      <link href="/2016/08/01/14817266761435/"/>
-      <url>/2016/08/01/14817266761435/</url>
+      <title>内存管理的两种实现</title>
+      <link href="/2016/08/01/14817252088642/"/>
+      <url>/2016/08/01/14817252088642/</url>
       
-        <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+        <content type="html"><![CDATA[<h4 id="内存管理的两种实现"><a href="#内存管理的两种实现" class="headerlink" title="内存管理的两种实现"></a>内存管理的两种实现</h4><h5 id="通过内存块头部管理引用计数"><a href="#通过内存块头部管理引用计数" class="headerlink" title="通过内存块头部管理引用计数"></a>通过内存块头部管理引用计数</h5><p>将引用计数保存在对象占用的块头部变量中。<br>即实现一个结构体</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct obj_layout &#123;</span><br><span class="line">charpadding[__BIGGEST_ALIGNMENT__ - ((UNP % __BIGGEST_ALIGNMENT__)</span><br><span class="line">  ? (UNP % __BIGGEST_ALIGNMENT__) : __BIGGEST_ALIGNMENT__)];</span><br><span class="line">NSUIntegerretained;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>在结构体中保存当前这个变量的引用计数。</p><h5 id="通过计数引用表来实现计数管理"><a href="#通过计数引用表来实现计数管理" class="headerlink" title="通过计数引用表来实现计数管理"></a>通过计数引用表来实现计数管理</h5><p>而通过对Foundation框架的逆向，可以发现苹果的实现是通过计数表来保存每个实例变量的引用计数。</p><p>在计数表中，每个内存对象地址为键值，指向一个计数值。</p><h4 id="两种计数方式的对比："><a href="#两种计数方式的对比：" class="headerlink" title="两种计数方式的对比："></a>两种计数方式的对比：</h4><p>1，通过内存块头部管理引用计数，<br>代码简单，不用维护一个计数表。<br>可以统一管理引用技术的内存与对象的内存块。负责计数的内存块与对象本身的内存块是在一起的。</p><p>2，通过哈希表实现引用计数，<br>在创建分配内存块的时候不需要考虑内存块头部的分配<br>哈希表中有记录各个内存块的地址，可以通过这个追溯到各个具体的实例变量。</p><p>在实际调试的过程中，只要计数表没有被破坏，可以很方便的通过引用计数表来追踪各个对象的计数。<br>同时，统一管理计数的时候，不需要考虑由于单个内存块出现故障，导致该内存对象的计数值丢失的问题。</p>]]></content>
       
       
       
@@ -241,11 +241,11 @@
     </entry>
     
     <entry>
-      <title>内存管理的两种实现</title>
-      <link href="/2016/08/01/14817252088642/"/>
-      <url>/2016/08/01/14817252088642/</url>
+      <title>autorelease 的实现</title>
+      <link href="/2016/08/01/14817266761435/"/>
+      <url>/2016/08/01/14817266761435/</url>
       
-        <content type="html"><![CDATA[<h4 id="内存管理的两种实现"><a href="#内存管理的两种实现" class="headerlink" title="内存管理的两种实现"></a>内存管理的两种实现</h4><h5 id="通过内存块头部管理引用计数"><a href="#通过内存块头部管理引用计数" class="headerlink" title="通过内存块头部管理引用计数"></a>通过内存块头部管理引用计数</h5><p>将引用计数保存在对象占用的块头部变量中。<br>即实现一个结构体</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct obj_layout &#123;</span><br><span class="line">charpadding[__BIGGEST_ALIGNMENT__ - ((UNP % __BIGGEST_ALIGNMENT__)</span><br><span class="line">  ? (UNP % __BIGGEST_ALIGNMENT__) : __BIGGEST_ALIGNMENT__)];</span><br><span class="line">NSUIntegerretained;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>在结构体中保存当前这个变量的引用计数。</p><h5 id="通过计数引用表来实现计数管理"><a href="#通过计数引用表来实现计数管理" class="headerlink" title="通过计数引用表来实现计数管理"></a>通过计数引用表来实现计数管理</h5><p>而通过对Foundation框架的逆向，可以发现苹果的实现是通过计数表来保存每个实例变量的引用计数。</p><p>在计数表中，每个内存对象地址为键值，指向一个计数值。</p><h4 id="两种计数方式的对比："><a href="#两种计数方式的对比：" class="headerlink" title="两种计数方式的对比："></a>两种计数方式的对比：</h4><p>1，通过内存块头部管理引用计数，<br>代码简单，不用维护一个计数表。<br>可以统一管理引用技术的内存与对象的内存块。负责计数的内存块与对象本身的内存块是在一起的。</p><p>2，通过哈希表实现引用计数，<br>在创建分配内存块的时候不需要考虑内存块头部的分配<br>哈希表中有记录各个内存块的地址，可以通过这个追溯到各个具体的实例变量。</p><p>在实际调试的过程中，只要计数表没有被破坏，可以很方便的通过引用计数表来追踪各个对象的计数。<br>同时，统一管理计数的时候，不需要考虑由于单个内存块出现故障，导致该内存对象的计数值丢失的问题。</p>]]></content>
+        <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
       
       
       

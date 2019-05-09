@@ -126,6 +126,55 @@
   
   <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/02/14753895285815/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2016/10/02/14753895285815/" itemprop="url">iOS开发相关内容</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-10-02T00:00:00+08:00">2016-10-02 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h2 id="iOS开发相关内容"><a href="#iOS开发相关内容" class="headerlink" title="iOS开发相关内容"></a>iOS开发相关内容</h2><h4 id="数据层"><a href="#数据层" class="headerlink" title="数据层"></a>数据层</h4><p>数据库持久化操作<br>fmdb,realm</p>
+<h4 id="UI层"><a href="#UI层" class="headerlink" title="UI层"></a>UI层</h4><p>UITableview中自适应cell高度<a href="14753087034345.md">UITableview中cell自适应高度</a></p>
+<p>轮播图实现,使用UICollectionView或者多个ImageView加上scrollView来展示。</p>
+<h4 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h4><p>网络访问</p>
+<h4 id="运营维护"><a href="#运营维护" class="headerlink" title="运营维护"></a>运营维护</h4><p>热更新<br>崩溃日志定位</p>
+<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><p><a href="14754103000423.md">iOS常见内存泄露错误</a></p>
+<h4 id="ios程序编译与逆向"><a href="#ios程序编译与逆向" class="headerlink" title="ios程序编译与逆向"></a>ios程序编译与逆向</h4><p>编译脚本</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/02/14754103000423/">
       <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
         <meta itemprop="name" content="XMinug">
@@ -161,60 +210,6 @@
 <p><strong>3.</strong>nil argument</p>
 <p>对NSArray或者NSDictionary对象传入一个空指针。在代码中首先创建了一个某类型的空指针，然后在下面的switch或者ifelse中对指针赋值。然后将对象传入一个字典或者数组中。如果没有做default判断，然后将一个nil指针传入array中，造成crash</p>
 <figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSString *s = nil;</span><br><span class="line">    switch Type&#123;</span><br><span class="line">        case 1:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 3:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    NSArray *a = @[s];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/10/02/14753087875883/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/10/02/14753087875883/" itemprop="url">ios小技巧</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-10-02T00:00:00+08:00">2016-10-02 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure>
-<p><strong>2.</strong> JS中实现的消息转发</p>
-<p><strong>3.</strong>关键字typeof()</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure>
-<p><strong>4.</strong>objectForKeyedSubscript:</p>
-<p>实现了这个方法，就能以 a[key] 的形式来取值。</p>
-<p><strong>5.</strong></p>
-<pre><code>#if !__has_feature(objc_arc)
-#error  does not support Objective-C Automatic Reference Counting (ARC)
-#endif
-</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>
 
       
     </main>
@@ -432,6 +427,56 @@
   
   <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/08/01/14817252088642/">
+      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="XMinug">
+        <meta itemprop="description" content="">
+        <meta itemprop="image" content="/images/avatar.png">
+      </span>
+      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Minug's Blog">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2016/08/01/14817252088642/" itemprop="url">内存管理的两种实现</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01 00:00</time></span>
+        </span>
+        
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h4 id="内存管理的两种实现"><a href="#内存管理的两种实现" class="headerlink" title="内存管理的两种实现"></a>内存管理的两种实现</h4><h5 id="通过内存块头部管理引用计数"><a href="#通过内存块头部管理引用计数" class="headerlink" title="通过内存块头部管理引用计数"></a>通过内存块头部管理引用计数</h5><p>将引用计数保存在对象占用的块头部变量中。<br>即实现一个结构体</p>
+<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct obj_layout &#123;</span><br><span class="line">char	padding[__BIGGEST_ALIGNMENT__ - ((UNP % __BIGGEST_ALIGNMENT__)</span><br><span class="line">  ? (UNP % __BIGGEST_ALIGNMENT__) : __BIGGEST_ALIGNMENT__)];</span><br><span class="line">NSUInteger	retained;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在结构体中保存当前这个变量的引用计数。</p>
+<h5 id="通过计数引用表来实现计数管理"><a href="#通过计数引用表来实现计数管理" class="headerlink" title="通过计数引用表来实现计数管理"></a>通过计数引用表来实现计数管理</h5><p>而通过对Foundation框架的逆向，可以发现苹果的实现是通过计数表来保存每个实例变量的引用计数。</p>
+<p>在计数表中，每个内存对象地址为键值，指向一个计数值。</p>
+<h4 id="两种计数方式的对比："><a href="#两种计数方式的对比：" class="headerlink" title="两种计数方式的对比："></a>两种计数方式的对比：</h4><p>1，通过内存块头部管理引用计数，<br>代码简单，不用维护一个计数表。<br>可以统一管理引用技术的内存与对象的内存块。负责计数的内存块与对象本身的内存块是在一起的。</p>
+<p>2，通过哈希表实现引用计数，<br>在创建分配内存块的时候不需要考虑内存块头部的分配<br>哈希表中有记录各个内存块的地址，可以通过这个追溯到各个具体的实例变量。</p>
+<p>在实际调试的过程中，只要计数表没有被破坏，可以很方便的通过引用计数表来追踪各个对象的计数。<br>同时，统一管理计数的时候，不需要考虑由于单个内存块出现故障，导致该内存对象的计数值丢失的问题。</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/08/01/14817266761435/">
       <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
         <meta itemprop="name" content="XMinug">
@@ -468,56 +513,6 @@
 <p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p>
 <p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p>
 <p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>
-
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/iOS/" rel="tag"><i class="fas fa-tags"></i>iOS</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="article post card" itemscope="" itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="https://minug.github.io/2016/08/01/14817252088642/">
-      <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="XMinug">
-        <meta itemprop="description" content="">
-        <meta itemprop="image" content="/images/avatar.png">
-      </span>
-      <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Minug's Blog">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2016/08/01/14817252088642/" itemprop="url">内存管理的两种实现</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2016-08-01T00:00:00+08:00">2016-08-01 00:00</time></span>
-        </span>
-        
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h4 id="内存管理的两种实现"><a href="#内存管理的两种实现" class="headerlink" title="内存管理的两种实现"></a>内存管理的两种实现</h4><h5 id="通过内存块头部管理引用计数"><a href="#通过内存块头部管理引用计数" class="headerlink" title="通过内存块头部管理引用计数"></a>通过内存块头部管理引用计数</h5><p>将引用计数保存在对象占用的块头部变量中。<br>即实现一个结构体</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct obj_layout &#123;</span><br><span class="line">char	padding[__BIGGEST_ALIGNMENT__ - ((UNP % __BIGGEST_ALIGNMENT__)</span><br><span class="line">  ? (UNP % __BIGGEST_ALIGNMENT__) : __BIGGEST_ALIGNMENT__)];</span><br><span class="line">NSUInteger	retained;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在结构体中保存当前这个变量的引用计数。</p>
-<h5 id="通过计数引用表来实现计数管理"><a href="#通过计数引用表来实现计数管理" class="headerlink" title="通过计数引用表来实现计数管理"></a>通过计数引用表来实现计数管理</h5><p>而通过对Foundation框架的逆向，可以发现苹果的实现是通过计数表来保存每个实例变量的引用计数。</p>
-<p>在计数表中，每个内存对象地址为键值，指向一个计数值。</p>
-<h4 id="两种计数方式的对比："><a href="#两种计数方式的对比：" class="headerlink" title="两种计数方式的对比："></a>两种计数方式的对比：</h4><p>1，通过内存块头部管理引用计数，<br>代码简单，不用维护一个计数表。<br>可以统一管理引用技术的内存与对象的内存块。负责计数的内存块与对象本身的内存块是在一起的。</p>
-<p>2，通过哈希表实现引用计数，<br>在创建分配内存块的时候不需要考虑内存块头部的分配<br>哈希表中有记录各个内存块的地址，可以通过这个追溯到各个具体的实例变量。</p>
-<p>在实际调试的过程中，只要计数表没有被破坏，可以很方便的通过引用计数表来追踪各个对象的计数。<br>同时，统一管理计数的时候，不需要考虑由于单个内存块出现故障，导致该内存对象的计数值丢失的问题。</p>
 
       
     </main>

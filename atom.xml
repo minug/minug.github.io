@@ -40,29 +40,6 @@
   </entry>
   
   <entry>
-    <title>iOS Block学习</title>
-    <link href="https://minug.github.io/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://minug.github.io/2019/03/30/todo/iOS Block学习/</id>
-    <published>2019-03-29T16:00:00.000Z</published>
-    <updated>2019-05-09T08:00:48.714Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Block的本质&quot;&gt;&lt;a href=&quot;#Block的本质&quot; class=&quot;headerlink&quot; title=&quot;Block的本质&quot;&gt;&lt;/a&gt;Block的本质&lt;/h1&gt;&lt;h4 id=&quot;Block&quot;&gt;&lt;a href=&quot;#Block&quot; class=&quot;headerlink
-      
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>RSA 原理</title>
     <link href="https://minug.github.io/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/"/>
     <id>https://minug.github.io/2019/03/30/todo/RSA 原理/</id>
@@ -83,6 +60,29 @@
     
     
       <category term="算法" scheme="https://minug.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS Block学习</title>
+    <link href="https://minug.github.io/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://minug.github.io/2019/03/30/todo/iOS Block学习/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.714Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Block的本质&quot;&gt;&lt;a href=&quot;#Block的本质&quot; class=&quot;headerlink&quot; title=&quot;Block的本质&quot;&gt;&lt;/a&gt;Block的本质&lt;/h1&gt;&lt;h4 id=&quot;Block&quot;&gt;&lt;a href=&quot;#Block&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
     
   </entry>
   
@@ -179,6 +179,29 @@
   </entry>
   
   <entry>
+    <title>ios小技巧</title>
+    <link href="https://minug.github.io/2016/10/02/14753087875883/"/>
+    <id>https://minug.github.io/2016/10/02/14753087875883/</id>
+    <published>2016-10-01T16:00:00.000Z</published>
+    <updated>2018-12-04T03:23:26.620Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ios小技巧&quot;&gt;&lt;a href=&quot;#ios小技巧&quot; class=&quot;headerlink&quot; title=&quot;ios小技巧&quot;&gt;&lt;/a&gt;ios小技巧&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 通过runtime的关联对象给对象额外增加实例。&lt;br&gt;关联对象,很
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>iOS开发相关内容</title>
     <link href="https://minug.github.io/2016/10/02/14753895285815/"/>
     <id>https://minug.github.io/2016/10/02/14753895285815/</id>
@@ -215,29 +238,6 @@
       
       
         &lt;h4 id=&quot;iOS常见内存泄露错误&quot;&gt;&lt;a href=&quot;#iOS常见内存泄露错误&quot; class=&quot;headerlink&quot; title=&quot;iOS常见内存泄露错误&quot;&gt;&lt;/a&gt;iOS常见内存泄露错误&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;常见内存错误&lt;/strong&gt;&lt;br&gt;&lt;strong
-      
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ios小技巧</title>
-    <link href="https://minug.github.io/2016/10/02/14753087875883/"/>
-    <id>https://minug.github.io/2016/10/02/14753087875883/</id>
-    <published>2016-10-01T16:00:00.000Z</published>
-    <updated>2018-12-04T03:23:26.620Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;ios小技巧&quot;&gt;&lt;a href=&quot;#ios小技巧&quot; class=&quot;headerlink&quot; title=&quot;ios小技巧&quot;&gt;&lt;/a&gt;ios小技巧&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 通过runtime的关联对象给对象额外增加实例。&lt;br&gt;关联对象,很
       
     
     </summary>
@@ -318,29 +318,6 @@
   </entry>
   
   <entry>
-    <title>autorelease 的实现</title>
-    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
-    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
-    <published>2016-07-31T16:00:00.000Z</published>
-    <updated>2019-05-09T08:00:48.713Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
-      
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
     <title>内存管理的两种实现</title>
     <link href="https://minug.github.io/2016/08/01/14817252088642/"/>
     <id>https://minug.github.io/2016/08/01/14817252088642/</id>
@@ -354,6 +331,29 @@
       
       
         &lt;h4 id=&quot;内存管理的两种实现&quot;&gt;&lt;a href=&quot;#内存管理的两种实现&quot; class=&quot;headerlink&quot; title=&quot;内存管理的两种实现&quot;&gt;&lt;/a&gt;内存管理的两种实现&lt;/h4&gt;&lt;h5 id=&quot;通过内存块头部管理引用计数&quot;&gt;&lt;a href=&quot;#通过内存块头部管理引用计
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>autorelease 的实现</title>
+    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
+    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
+    <published>2016-07-31T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.713Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
       
     
     </summary>
