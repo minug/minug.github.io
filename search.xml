@@ -3,11 +3,113 @@
   
     
     <entry>
-      <title>ios小技巧</title>
-      <link href="/2016/10/02/14753087875883/"/>
-      <url>/2016/10/02/14753087875883/</url>
+      <title>FLEX原理解析</title>
+      <link href="/2019/03/30/todo/FLEX%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/"/>
+      <url>/2019/03/30/todo/FLEX%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</url>
       
-        <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="FLEX原理详解"><a href="#FLEX原理详解" class="headerlink" title="FLEX原理详解"></a>FLEX原理详解</h1><h4 id="FLEX介绍"><a href="#FLEX介绍" class="headerlink" title="FLEX介绍"></a>FLEX介绍</h4><p>FLEX是一个可以用在iOS系统上的调试库。使用FLEX，可以在程序运行时很方便的查看系统log，网络请求，内存堆栈，查看当前内存中运行的对象，并可以直接调用对象的某个方法。也可以动态查看当前页面中的UI元素节点。</p><p>因此，FLEX也被成为调试神器。</p><p>我们可以在Github<a href="!https://github.com/Flipboard/FLEX">FLEX</a>上找到FLEX的源码。</p><p>也可以通过pod ‘FLEX’ ，快速将FLEX加入到工程中来。</p><h4 id="FLEX的使用"><a href="#FLEX的使用" class="headerlink" title="FLEX的使用"></a>FLEX的使用</h4><p>在实际应用过程中，我们可以用FLEX做很多事情。</p><h4 id="FLEX是如何查看应用堆栈的"><a href="#FLEX是如何查看应用堆栈的" class="headerlink" title="FLEX是如何查看应用堆栈的"></a>FLEX是如何查看应用堆栈的</h4><h4 id="如何查看网络请求信息"><a href="#如何查看网络请求信息" class="headerlink" title="如何查看网络请求信息"></a>如何查看网络请求信息</h4><h4 id="如何查看页面元素"><a href="#如何查看页面元素" class="headerlink" title="如何查看页面元素"></a>如何查看页面元素</h4><h4 id="更多的调试库"><a href="#更多的调试库" class="headerlink" title="更多的调试库"></a>更多的调试库</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>iOS Block学习</title>
+      <link href="/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>RSA 原理</title>
+      <link href="/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/"/>
+      <url>/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="RSA-原理"><a href="#RSA-原理" class="headerlink" title="RSA 原理"></a>RSA 原理</h1><p>N = 323;17*19 = 323 私钥</p><p>L = 144;16 18 最小公倍数 144</p><p>E = 5; 1&lt;E&lt;L &amp;&amp; gcd(E,L) =1</p><p>公钥(E,N) = (5,323)<br>私钥 (D,N) = (29,323) 5*29mode144 = 1</p><p>明文 20</p><p>密文为 20^5===323 == 39</p><p>反算 39^29===323</p><p>305 * 286 === 323 = 20</p><p>N = 31<em>37 = 1147<br>L = 30</em>36=5<em>6</em>6 = 180<br>E = 17 D = 53</p><p>明文20<br>密文 20^17mod1147 == </p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>iOS多线程GCD</title>
+      <link href="/2019/03/30/todo/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8BGCD/"/>
+      <url>/2019/03/30/todo/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8BGCD/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>weex原理</title>
+      <link href="/2019/03/30/todo/weex%E5%8E%9F%E7%90%86/"/>
+      <url>/2019/03/30/todo/weex%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h1 id="FLEX原理详解"><a href="#FLEX原理详解" class="headerlink" title="FLEX原理详解"></a>FLEX原理详解</h1><h4 id="FLEX介绍"><a href="#FLEX介绍" class="headerlink" title="FLEX介绍"></a>FLEX介绍</h4><p>FLEX是一个可以用在iOS系统上的调试库。使用FLEX，可以在程序运行时很方便的查看系统log，网络请求，内存堆栈，查看当前内存中运行的对象，并可以直接调用对象的某个方法。也可以动态查看当前页面中的UI元素节点。</p><p>因此，FLEX也被成为调试神器。</p><p>我们可以在Github<a href="!https://github.com/Flipboard/FLEX">FLEX</a>上找到FLEX的源码。</p><p>也可以通过pod ‘FLEX’ ，快速将FLEX加入到工程中来。</p><h4 id="FLEX的使用"><a href="#FLEX的使用" class="headerlink" title="FLEX的使用"></a>FLEX的使用</h4><p>在实际应用过程中，我们可以用FLEX做很多事情。</p><h4 id="FLEX是如何查看应用堆栈的"><a href="#FLEX是如何查看应用堆栈的" class="headerlink" title="FLEX是如何查看应用堆栈的"></a>FLEX是如何查看应用堆栈的</h4><h4 id="如何查看网络请求信息"><a href="#如何查看网络请求信息" class="headerlink" title="如何查看网络请求信息"></a>如何查看网络请求信息</h4><h4 id="如何查看页面元素"><a href="#如何查看页面元素" class="headerlink" title="如何查看页面元素"></a>如何查看页面元素</h4><h4 id="更多的调试库"><a href="#更多的调试库" class="headerlink" title="更多的调试库"></a>更多的调试库</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>信息安全解析</title>
+      <link href="/2019/03/30/todo/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%A7%A3%E6%9E%90/"/>
+      <url>/2019/03/30/todo/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%A7%A3%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>普通加密算法解析</title>
+      <link href="/2019/03/30/todo/%E6%99%AE%E9%80%9A%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/"/>
+      <url>/2019/03/30/todo/%E6%99%AE%E9%80%9A%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
       
       
       
@@ -42,6 +144,23 @@
       <url>/2016/10/02/14754103000423/</url>
       
         <content type="html"><![CDATA[<h4 id="iOS常见内存泄露错误"><a href="#iOS常见内存泄露错误" class="headerlink" title="iOS常见内存泄露错误"></a>iOS常见内存泄露错误</h4><p><strong>常见内存错误</strong><br><strong>1.</strong>memory leak</p><p>一般情况是，在某个方法的中通过new或者alloc，copy，create出一个新的对象之后，没有在该方法的最下方进行release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSObject *obj = [[NSObject alloc] init];</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>2.</strong>bad release</p><p>在某个方法的对不是通过new或者alloc，copy，create创建的新对象进行了一次release操作。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)func:(NSObject*)obj&#123;</span><br><span class="line">    [obj someMethod];</span><br><span class="line">    [obj release];</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>3.</strong>nil argument</p><p>对NSArray或者NSDictionary对象传入一个空指针。在代码中首先创建了一个某类型的空指针，然后在下面的switch或者ifelse中对指针赋值。然后将对象传入一个字典或者数组中。如果没有做default判断，然后将一个nil指针传入array中，造成crash</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-(void)func&#123;</span><br><span class="line">    NSString *s = nil;</span><br><span class="line">    switch Type&#123;</span><br><span class="line">        case 1:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 2:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">        case 3:</span><br><span class="line">            s = @&quot;&quot;;</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">    NSArray *a = @[s];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>ios小技巧</title>
+      <link href="/2016/10/02/14753087875883/"/>
+      <url>/2016/10/02/14753087875883/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
       
       
       
@@ -105,6 +224,23 @@
     </entry>
     
     <entry>
+      <title>autorelease 的实现</title>
+      <link href="/2016/08/01/14817266761435/"/>
+      <url>/2016/08/01/14817266761435/</url>
+      
+        <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> iOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>内存管理的两种实现</title>
       <link href="/2016/08/01/14817252088642/"/>
       <url>/2016/08/01/14817252088642/</url>
@@ -122,17 +258,17 @@
     </entry>
     
     <entry>
-      <title>autorelease 的实现</title>
-      <link href="/2016/08/01/14817266761435/"/>
-      <url>/2016/08/01/14817266761435/</url>
+      <title>Mac下面使用SSH密钥登录腾讯云</title>
+      <link href="/2016/08/01/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E8%85%BE%E8%AE%AF%E4%BA%91/"/>
+      <url>/2016/08/01/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E8%85%BE%E8%AE%AF%E4%BA%91/</url>
       
-        <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runtim的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+        <content type="html"><![CDATA[<h3 id="Mac下面使用SSH密钥登录腾讯云"><a href="#Mac下面使用SSH密钥登录腾讯云" class="headerlink" title="Mac下面使用SSH密钥登录腾讯云"></a>Mac下面使用SSH密钥登录腾讯云</h3><p>在腾讯云配置使用ssh登录后，可以下载一个mbp.dms的文件。通过 ssh -i mbp.dms ubuntu@ip 的形式，就可以直接登录远程的服务器，而不需要输入密码。</p><p>实际上，在这个文件中就是一个私钥，在服务器中配置了对应的公钥。</p><p>但是有时候，我们可能连 -i key 的命令都不想输入，毕竟这样的话，还需要知道实际上存放在电脑上面的私钥文件路径。</p><p>我们可以通过在 .ssh 文件夹下面来配置config文件来设置快捷登录</p><p>在 .ssh 文件夹下面，创建一个config的文件。</p><p>config的文件格式为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host tencent</span><br><span class="line">HostName **** </span><br><span class="line">#你的主机ip</span><br><span class="line">User root</span><br><span class="line"># 你的登录用户名</span><br><span class="line">IdentityFile ~/.ssh/tencent_key</span><br><span class="line">#设置的文件路径</span><br></pre></td></tr></table></figure><p>在将对应的私钥拷贝到IdentityFile中设置的文件路径。</p><p>然后就可以使用命令</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh tencent</span><br></pre></td></tr></table></figure><p>即可直接连接到服务器去</p>]]></content>
       
       
       
         <tags>
             
-            <tag> iOS </tag>
+            <tag> Linux </tag>
             
         </tags>
       
@@ -173,11 +309,11 @@
     </entry>
     
     <entry>
-      <title>腾讯即通产品部 iOS面试</title>
+      <title>iOS实习面试问题</title>
       <link href="/2016/04/17/4_17_Tecent/"/>
       <url>/2016/04/17/4_17_Tecent/</url>
       
-        <content type="html"><![CDATA[<h3 id="2016-4-17-Tecent-iOS面试"><a href="#2016-4-17-Tecent-iOS面试" class="headerlink" title="2016.4.17_Tecent iOS面试"></a>2016.4.17_Tecent iOS面试</h3><h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ol><li>TCP与UDP的区别</li><li>TCP握手</li><li>HTTP首部</li></ol><h4 id="IOS相关"><a href="#IOS相关" class="headerlink" title="IOS相关"></a>IOS相关</h4><ol start="4"><li>GCD介绍，多线程解决方案与进程通信相关</li><li>ARC解释</li></ol><h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol start="6"><li>数据库范式</li><li>手写数据库注入范例</li><li>数据库防止注入方案</li></ol><h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><ol start="9"><li>DES加密</li></ol><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol start="10"><li>C++变量声明周期</li></ol><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ol start="11"><li>手写链表结构与增删改查操作</li></ol>]]></content>
+        <content type="html"><![CDATA[<h3 id="2016-4-17-Tecent-iOS面试"><a href="#2016-4-17-Tecent-iOS面试" class="headerlink" title="2016.4.17 Tecent iOS面试"></a>2016.4.17 Tecent iOS面试</h3><h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ol><li>TCP与UDP的区别<br>TCP是有效</li><li>TCP握手</li><li>HTTP首部</li></ol><h4 id="IOS相关"><a href="#IOS相关" class="headerlink" title="IOS相关"></a>IOS相关</h4><ol start="4"><li>GCD介绍，多线程解决方案与进程通信相关</li><li>ARC解释</li></ol><h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol start="6"><li>数据库范式</li><li>手写数据库注入范例</li><li>数据库防止注入方案</li></ol><h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><ol start="9"><li>DES加密</li></ol><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol start="10"><li>C++变量声明周期</li></ol><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ol start="11"><li>手写链表结构与增删改查操作</li></ol>]]></content>
       
       
       

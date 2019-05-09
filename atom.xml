@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://minug.github.io/"/>
-  <updated>2018-12-04T03:23:26.620Z</updated>
+  <updated>2019-05-09T08:00:48.714Z</updated>
   <id>https://minug.github.io/</id>
   
   <author>
@@ -17,19 +17,158 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ios小技巧</title>
-    <link href="https://minug.github.io/2016/10/02/14753087875883/"/>
-    <id>https://minug.github.io/2016/10/02/14753087875883/</id>
-    <published>2016-10-01T16:00:00.000Z</published>
-    <updated>2018-12-04T03:23:26.620Z</updated>
+    <title>FLEX原理解析</title>
+    <link href="https://minug.github.io/2019/03/30/todo/FLEX%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/"/>
+    <id>https://minug.github.io/2019/03/30/todo/FLEX原理解析/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.714Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="FLEX原理详解"><a href="#FLEX原理详解" class="headerlink" title="FLEX原理详解"></a>FLEX原理详解</h1><h4 id="FLEX介绍"><a href="#FLEX介绍" class="headerlink" title="FLEX介绍"></a>FLEX介绍</h4><p>FLEX是一个可以用在iOS系统上的调试库。使用FLEX，可以在程序运行时很方便的查看系统log，网络请求，内存堆栈，查看当前内存中运行的对象，并可以直接调用对象的某个方法。也可以动态查看当前页面中的UI元素节点。</p><p>因此，FLEX也被成为调试神器。</p><p>我们可以在Github<a href="!https://github.com/Flipboard/FLEX">FLEX</a>上找到FLEX的源码。</p><p>也可以通过pod ‘FLEX’ ，快速将FLEX加入到工程中来。</p><h4 id="FLEX的使用"><a href="#FLEX的使用" class="headerlink" title="FLEX的使用"></a>FLEX的使用</h4><p>在实际应用过程中，我们可以用FLEX做很多事情。</p><h4 id="FLEX是如何查看应用堆栈的"><a href="#FLEX是如何查看应用堆栈的" class="headerlink" title="FLEX是如何查看应用堆栈的"></a>FLEX是如何查看应用堆栈的</h4><h4 id="如何查看网络请求信息"><a href="#如何查看网络请求信息" class="headerlink" title="如何查看网络请求信息"></a>如何查看网络请求信息</h4><h4 id="如何查看页面元素"><a href="#如何查看页面元素" class="headerlink" title="如何查看页面元素"></a>如何查看页面元素</h4><h4 id="更多的调试库"><a href="#更多的调试库" class="headerlink" title="更多的调试库"></a>更多的调试库</h4>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;ios小技巧&quot;&gt;&lt;a href=&quot;#ios小技巧&quot; class=&quot;headerlink&quot; title=&quot;ios小技巧&quot;&gt;&lt;/a&gt;ios小技巧&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 通过runtime的关联对象给对象额外增加实例。&lt;br&gt;关联对象,很
+        &lt;h1 id=&quot;FLEX原理详解&quot;&gt;&lt;a href=&quot;#FLEX原理详解&quot; class=&quot;headerlink&quot; title=&quot;FLEX原理详解&quot;&gt;&lt;/a&gt;FLEX原理详解&lt;/h1&gt;&lt;h4 id=&quot;FLEX介绍&quot;&gt;&lt;a href=&quot;#FLEX介绍&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS Block学习</title>
+    <link href="https://minug.github.io/2019/03/30/todo/iOS%20Block%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://minug.github.io/2019/03/30/todo/iOS Block学习/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.714Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Block的本质"><a href="#Block的本质" class="headerlink" title="Block的本质"></a>Block的本质</h1><h4 id="Block"><a href="#Block" class="headerlink" title="Block"></a>Block</h4><p>Block的本质就是C语言中的指针函数调用。我们平时在OC中写的Block代码，在clang编译的时候，都会被转换成一个静态函数，并通过Struct包装他的函数地址，用来方便进行调用。</p><p>对于Block中自动捕获的变量，会在创建block Struct的时候赋值给到struct 内的一个变量。</p><p>Block在经过clang编译后，会被转成三块实现：</p><ol><li>是BlockImpl的结构体</li><li>是static的静态函数，实际上就是我们写的block的实际实现代码，</li><li>是BlockImplDesc，用来描述当前Block的size等信息。</li></ol><p>对于用__block 进行描述的变量，在实际编译过程中，会变成一个堆里面的对象。</p><h4 id="不同的Block类型"><a href="#不同的Block类型" class="headerlink" title="不同的Block类型"></a>不同的Block类型</h4><p>通过打印Block的类型，可以看到Block有几个不同的类型。</p><ul><li>_NSConcreteStackBlock 栈上Block</li><li>_NSConcreteGlobalBlock 全局Block</li><li>_NSConcreteMallocBlock 堆上Block 将block作为函数返回值时，编译器会自动生成复制到堆上的代码。或者使用copy</li></ul><h5 id="block-标记的对象"><a href="#block-标记的对象" class="headerlink" title="__block 标记的对象"></a>__block 标记的对象</h5><p>使用 __block 标记符标记的变量，会变被包装成一个对象。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Block的本质&quot;&gt;&lt;a href=&quot;#Block的本质&quot; class=&quot;headerlink&quot; title=&quot;Block的本质&quot;&gt;&lt;/a&gt;Block的本质&lt;/h1&gt;&lt;h4 id=&quot;Block&quot;&gt;&lt;a href=&quot;#Block&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RSA 原理</title>
+    <link href="https://minug.github.io/2019/03/30/todo/RSA%20%E5%8E%9F%E7%90%86/"/>
+    <id>https://minug.github.io/2019/03/30/todo/RSA 原理/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.714Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="RSA-原理"><a href="#RSA-原理" class="headerlink" title="RSA 原理"></a>RSA 原理</h1><p>N = 323;17*19 = 323 私钥</p><p>L = 144;16 18 最小公倍数 144</p><p>E = 5; 1&lt;E&lt;L &amp;&amp; gcd(E,L) =1</p><p>公钥(E,N) = (5,323)<br>私钥 (D,N) = (29,323) 5*29mode144 = 1</p><p>明文 20</p><p>密文为 20^5===323 == 39</p><p>反算 39^29===323</p><p>305 * 286 === 323 = 20</p><p>N = 31<em>37 = 1147<br>L = 30</em>36=5<em>6</em>6 = 180<br>E = 17 D = 53</p><p>明文20<br>密文 20^17mod1147 == </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;RSA-原理&quot;&gt;&lt;a href=&quot;#RSA-原理&quot; class=&quot;headerlink&quot; title=&quot;RSA 原理&quot;&gt;&lt;/a&gt;RSA 原理&lt;/h1&gt;&lt;p&gt;N = 323;17*19 = 323 私钥&lt;/p&gt;
+&lt;p&gt;L = 144;16 18 最小公倍数 144&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://minug.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS多线程GCD</title>
+    <link href="https://minug.github.io/2019/03/30/todo/iOS%E5%A4%9A%E7%BA%BF%E7%A8%8BGCD/"/>
+    <id>https://minug.github.io/2019/03/30/todo/iOS多线程GCD/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.715Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;iOS上的多线程&quot;&gt;&lt;a href=&quot;#iOS上的多线程&quot; class=&quot;headerlink&quot; title=&quot;iOS上的多线程&quot;&gt;&lt;/a&gt;iOS上的多线程&lt;/h1&gt;&lt;h4 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>weex原理</title>
+    <link href="https://minug.github.io/2019/03/30/todo/weex%E5%8E%9F%E7%90%86/"/>
+    <id>https://minug.github.io/2019/03/30/todo/weex原理/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.715Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="FLEX原理详解"><a href="#FLEX原理详解" class="headerlink" title="FLEX原理详解"></a>FLEX原理详解</h1><h4 id="FLEX介绍"><a href="#FLEX介绍" class="headerlink" title="FLEX介绍"></a>FLEX介绍</h4><p>FLEX是一个可以用在iOS系统上的调试库。使用FLEX，可以在程序运行时很方便的查看系统log，网络请求，内存堆栈，查看当前内存中运行的对象，并可以直接调用对象的某个方法。也可以动态查看当前页面中的UI元素节点。</p><p>因此，FLEX也被成为调试神器。</p><p>我们可以在Github<a href="!https://github.com/Flipboard/FLEX">FLEX</a>上找到FLEX的源码。</p><p>也可以通过pod ‘FLEX’ ，快速将FLEX加入到工程中来。</p><h4 id="FLEX的使用"><a href="#FLEX的使用" class="headerlink" title="FLEX的使用"></a>FLEX的使用</h4><p>在实际应用过程中，我们可以用FLEX做很多事情。</p><h4 id="FLEX是如何查看应用堆栈的"><a href="#FLEX是如何查看应用堆栈的" class="headerlink" title="FLEX是如何查看应用堆栈的"></a>FLEX是如何查看应用堆栈的</h4><h4 id="如何查看网络请求信息"><a href="#如何查看网络请求信息" class="headerlink" title="如何查看网络请求信息"></a>如何查看网络请求信息</h4><h4 id="如何查看页面元素"><a href="#如何查看页面元素" class="headerlink" title="如何查看页面元素"></a>如何查看页面元素</h4><h4 id="更多的调试库"><a href="#更多的调试库" class="headerlink" title="更多的调试库"></a>更多的调试库</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;FLEX原理详解&quot;&gt;&lt;a href=&quot;#FLEX原理详解&quot; class=&quot;headerlink&quot; title=&quot;FLEX原理详解&quot;&gt;&lt;/a&gt;FLEX原理详解&lt;/h1&gt;&lt;h4 id=&quot;FLEX介绍&quot;&gt;&lt;a href=&quot;#FLEX介绍&quot; class=&quot;headerli
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>信息安全解析</title>
+    <link href="https://minug.github.io/2019/03/30/todo/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E8%A7%A3%E6%9E%90/"/>
+    <id>https://minug.github.io/2019/03/30/todo/信息安全解析/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.715Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;iOS上的多线程&quot;&gt;&lt;a href=&quot;#iOS上的多线程&quot; class=&quot;headerlink&quot; title=&quot;iOS上的多线程&quot;&gt;&lt;/a&gt;iOS上的多线程&lt;/h1&gt;&lt;h4 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>普通加密算法解析</title>
+    <link href="https://minug.github.io/2019/03/30/todo/%E6%99%AE%E9%80%9A%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/"/>
+    <id>https://minug.github.io/2019/03/30/todo/普通加密算法解析/</id>
+    <published>2019-03-29T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.715Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="iOS上的多线程"><a href="#iOS上的多线程" class="headerlink" title="iOS上的多线程"></a>iOS上的多线程</h1><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p>串行队列与并行队列</p><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>同步执行与异步执行</p><h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>如何OC上的GCD本质是什么？如何做到跨平台使用</p><h4 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h4>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;iOS上的多线程&quot;&gt;&lt;a href=&quot;#iOS上的多线程&quot; class=&quot;headerlink&quot; title=&quot;iOS上的多线程&quot;&gt;&lt;/a&gt;iOS上的多线程&lt;/h1&gt;&lt;h4 id=&quot;队列&quot;&gt;&lt;a href=&quot;#队列&quot; class=&quot;headerlink&quot; titl
       
     
     </summary>
@@ -76,6 +215,29 @@
       
       
         &lt;h4 id=&quot;iOS常见内存泄露错误&quot;&gt;&lt;a href=&quot;#iOS常见内存泄露错误&quot; class=&quot;headerlink&quot; title=&quot;iOS常见内存泄露错误&quot;&gt;&lt;/a&gt;iOS常见内存泄露错误&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;常见内存错误&lt;/strong&gt;&lt;br&gt;&lt;strong
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ios小技巧</title>
+    <link href="https://minug.github.io/2016/10/02/14753087875883/"/>
+    <id>https://minug.github.io/2016/10/02/14753087875883/</id>
+    <published>2016-10-01T16:00:00.000Z</published>
+    <updated>2018-12-04T03:23:26.620Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ios小技巧"><a href="#ios小技巧" class="headerlink" title="ios小技巧"></a>ios小技巧</h1><p><strong>1.</strong> 通过runtime的关联对象给对象额外增加实例。<br>关联对象,很聪明的做法就是使用_cmd指针作为key，不用再额外维护一个字符或其他对象。</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN);</span><br><span class="line"></span><br><span class="line">objc_getAssociatedObject(self, _cmd)</span><br></pre></td></tr></table></figure><p><strong>2.</strong> JS中实现的消息转发</p><p><strong>3.</strong>关键字typeof()</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__weak typeof(self) weakSelf = self;</span><br></pre></td></tr></table></figure><p><strong>4.</strong>objectForKeyedSubscript:</p><p>实现了这个方法，就能以 a[key] 的形式来取值。</p><p><strong>5.</strong></p><pre><code>#if !__has_feature(objc_arc)#error  does not support Objective-C Automatic Reference Counting (ARC)#endif</code></pre><p>通过这个宏来判断该文件是否支持ARC，如果不支持ARC，则报错。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ios小技巧&quot;&gt;&lt;a href=&quot;#ios小技巧&quot; class=&quot;headerlink&quot; title=&quot;ios小技巧&quot;&gt;&lt;/a&gt;ios小技巧&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 通过runtime的关联对象给对象额外增加实例。&lt;br&gt;关联对象,很
       
     
     </summary>
@@ -156,6 +318,29 @@
   </entry>
   
   <entry>
+    <title>autorelease 的实现</title>
+    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
+    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
+    <published>2016-07-31T16:00:00.000Z</published>
+    <updated>2019-05-09T08:00:48.713Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runloop的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
+      
+    
+    </summary>
+    
+    
+      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>内存管理的两种实现</title>
     <link href="https://minug.github.io/2016/08/01/14817252088642/"/>
     <id>https://minug.github.io/2016/08/01/14817252088642/</id>
@@ -179,25 +364,25 @@
   </entry>
   
   <entry>
-    <title>autorelease 的实现</title>
-    <link href="https://minug.github.io/2016/08/01/14817266761435/"/>
-    <id>https://minug.github.io/2016/08/01/14817266761435/</id>
+    <title>Mac下面使用SSH密钥登录腾讯云</title>
+    <link href="https://minug.github.io/2016/08/01/Mac%E4%B8%8B%E4%BD%BF%E7%94%A8ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E8%85%BE%E8%AE%AF%E4%BA%91/"/>
+    <id>https://minug.github.io/2016/08/01/Mac下使用ssh密钥登录腾讯云/</id>
     <published>2016-07-31T16:00:00.000Z</published>
-    <updated>2018-12-04T03:17:54.036Z</updated>
+    <updated>2019-05-09T08:00:48.714Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="autorelease-的实现"><a href="#autorelease-的实现" class="headerlink" title="autorelease 的实现"></a>autorelease 的实现</h3><p>调用autorelease 方法速度比较快的原因：<br>在 NSObject 的 initialize方法中，通过<br>static IMP autorelease_imp 来对 NSAutoreleasePool 的 @selector(addObject:) 方法进行了缓存，以后调用不需要通过查找，直接通过该方法指针进行调用即可。</p><p>实际调用结果等同于</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-( id )autorelease&#123;</span><br><span class="line">    [NSAutoreleasePool addObject:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在 NSAutoreleasePool 内部，具体实现为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+(id)addObject:(id)obj&#123;</span><br><span class="line">    pool = currentPool();</span><br><span class="line">    [pool addObject:obj];</span><br><span class="line">&#125;</span><br><span class="line">- (void) addObject: (id)anObj&#123;</span><br><span class="line">    [autorelease_array_lisy addObject:anobj];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>即在pool内部会维护一个数组，每个被添加到pool内部的对象都会添加到数组中去。</p><p>当pool被调用到 drain方法时，会将pool内所管理的对象进行一个release操作，然后dealloc销毁自身。</p><p>我们可以通过@autoreleasepool{<br>//code<br>}<br>来自己创建并管理一个pool，也可以使用系统维护的autoreleasepool来实现内存的释放。</p><p>而由系统来维护的autoreasepool则会在runtim的运行过程中不断的创建与销毁，来实现内部变量的释放</p><p><a href="http://www.cocoachina.com/ios/20150610/12093.html" target="_blank" rel="noopener">http://www.cocoachina.com/ios/20150610/12093.html</a></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="Mac下面使用SSH密钥登录腾讯云"><a href="#Mac下面使用SSH密钥登录腾讯云" class="headerlink" title="Mac下面使用SSH密钥登录腾讯云"></a>Mac下面使用SSH密钥登录腾讯云</h3><p>在腾讯云配置使用ssh登录后，可以下载一个mbp.dms的文件。通过 ssh -i mbp.dms ubuntu@ip 的形式，就可以直接登录远程的服务器，而不需要输入密码。</p><p>实际上，在这个文件中就是一个私钥，在服务器中配置了对应的公钥。</p><p>但是有时候，我们可能连 -i key 的命令都不想输入，毕竟这样的话，还需要知道实际上存放在电脑上面的私钥文件路径。</p><p>我们可以通过在 .ssh 文件夹下面来配置config文件来设置快捷登录</p><p>在 .ssh 文件夹下面，创建一个config的文件。</p><p>config的文件格式为</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host tencent</span><br><span class="line">HostName **** </span><br><span class="line">#你的主机ip</span><br><span class="line">User root</span><br><span class="line"># 你的登录用户名</span><br><span class="line">IdentityFile ~/.ssh/tencent_key</span><br><span class="line">#设置的文件路径</span><br></pre></td></tr></table></figure><p>在将对应的私钥拷贝到IdentityFile中设置的文件路径。</p><p>然后就可以使用命令</p><figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh tencent</span><br></pre></td></tr></table></figure><p>即可直接连接到服务器去</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;autorelease-的实现&quot;&gt;&lt;a href=&quot;#autorelease-的实现&quot; class=&quot;headerlink&quot; title=&quot;autorelease 的实现&quot;&gt;&lt;/a&gt;autorelease 的实现&lt;/h3&gt;&lt;p&gt;调用autorelease 方法速度
+        &lt;h3 id=&quot;Mac下面使用SSH密钥登录腾讯云&quot;&gt;&lt;a href=&quot;#Mac下面使用SSH密钥登录腾讯云&quot; class=&quot;headerlink&quot; title=&quot;Mac下面使用SSH密钥登录腾讯云&quot;&gt;&lt;/a&gt;Mac下面使用SSH密钥登录腾讯云&lt;/h3&gt;&lt;p&gt;在腾讯云配置使用ss
       
     
     </summary>
     
     
-      <category term="iOS" scheme="https://minug.github.io/tags/iOS/"/>
+      <category term="Linux" scheme="https://minug.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -248,19 +433,19 @@
   </entry>
   
   <entry>
-    <title>腾讯即通产品部 iOS面试</title>
+    <title>iOS实习面试问题</title>
     <link href="https://minug.github.io/2016/04/17/4_17_Tecent/"/>
     <id>https://minug.github.io/2016/04/17/4_17_Tecent/</id>
     <published>2016-04-16T16:00:00.000Z</published>
-    <updated>2018-12-04T03:20:01.659Z</updated>
+    <updated>2019-05-09T06:39:02.913Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="2016-4-17-Tecent-iOS面试"><a href="#2016-4-17-Tecent-iOS面试" class="headerlink" title="2016.4.17_Tecent iOS面试"></a>2016.4.17_Tecent iOS面试</h3><h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ol><li>TCP与UDP的区别</li><li>TCP握手</li><li>HTTP首部</li></ol><h4 id="IOS相关"><a href="#IOS相关" class="headerlink" title="IOS相关"></a>IOS相关</h4><ol start="4"><li>GCD介绍，多线程解决方案与进程通信相关</li><li>ARC解释</li></ol><h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol start="6"><li>数据库范式</li><li>手写数据库注入范例</li><li>数据库防止注入方案</li></ol><h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><ol start="9"><li>DES加密</li></ol><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol start="10"><li>C++变量声明周期</li></ol><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ol start="11"><li>手写链表结构与增删改查操作</li></ol>]]></content>
+    <content type="html"><![CDATA[<h3 id="2016-4-17-Tecent-iOS面试"><a href="#2016-4-17-Tecent-iOS面试" class="headerlink" title="2016.4.17 Tecent iOS面试"></a>2016.4.17 Tecent iOS面试</h3><h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><ol><li>TCP与UDP的区别<br>TCP是有效</li><li>TCP握手</li><li>HTTP首部</li></ol><h4 id="IOS相关"><a href="#IOS相关" class="headerlink" title="IOS相关"></a>IOS相关</h4><ol start="4"><li>GCD介绍，多线程解决方案与进程通信相关</li><li>ARC解释</li></ol><h4 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h4><ol start="6"><li>数据库范式</li><li>手写数据库注入范例</li><li>数据库防止注入方案</li></ol><h4 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h4><ol start="9"><li>DES加密</li></ol><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol start="10"><li>C++变量声明周期</li></ol><h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ol start="11"><li>手写链表结构与增删改查操作</li></ol>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;2016-4-17-Tecent-iOS面试&quot;&gt;&lt;a href=&quot;#2016-4-17-Tecent-iOS面试&quot; class=&quot;headerlink&quot; title=&quot;2016.4.17_Tecent iOS面试&quot;&gt;&lt;/a&gt;2016.4.17_Tecent iOS
+        &lt;h3 id=&quot;2016-4-17-Tecent-iOS面试&quot;&gt;&lt;a href=&quot;#2016-4-17-Tecent-iOS面试&quot; class=&quot;headerlink&quot; title=&quot;2016.4.17 Tecent iOS面试&quot;&gt;&lt;/a&gt;2016.4.17 Tecent iOS
       
     
     </summary>
@@ -291,29 +476,6 @@
     
     
       <category term="面试" scheme="https://minug.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OSI</title>
-    <link href="https://minug.github.io/2016/03/21/tcpip/"/>
-    <id>https://minug.github.io/2016/03/21/tcpip/</id>
-    <published>2016-03-20T16:00:00.000Z</published>
-    <updated>2018-12-04T03:20:56.380Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="OSI参考模型"><a href="#OSI参考模型" class="headerlink" title="OSI参考模型"></a>OSI参考模型</h1><h4 id="OSI参考模型网络层、子层和层分组"><a href="#OSI参考模型网络层、子层和层分组" class="headerlink" title="OSI参考模型网络层、子层和层分组"></a>OSI参考模型网络层、子层和层分组</h4><p>第一层是最具体的，处理了实际的网络硬件和从一台设备到另一台设备发送比特的特定方法。第二层处理的依旧是信令和硬件。随着到了第3，4层，变得越来越抽象，等到了应用层，就不再处理硬件或者操作系统的概念了。</p><h4 id="PDU和SDU"><a href="#PDU和SDU" class="headerlink" title="PDU和SDU"></a>PDU和SDU</h4><p>PDU，协议数据单元</p><p>SDU，服务数据单元</p><p>每个协议会生成一个供传输的PDU，该数据就是下一层的SDU。</p><p>PDU就是上层协议内容，加上本层的协议头。</p><h3 id="中间设备"><a href="#中间设备" class="headerlink" title="中间设备"></a>中间设备</h3><p>中间设备在物理层接受报文，然后报文被上传到数据链路层，在这里被处理，检错等，且数据链路层的首部被剥去，处理后的分组被向上传递到网络层。在那里，网络层判断目的机器是不是在本地网络上，或分组是否需要被转发到另一个中间设备。然后被重新打包成报文，向下返回到数据链路层，等待继续发送</p><p>报文沿着OSI模型向上只到网络层，然后重新被打包，沿着线路在物理层发送。</p><h1 id="OSI层次作用"><a href="#OSI层次作用" class="headerlink" title="OSI层次作用"></a>OSI层次作用</h1><blockquote><p>应用层</p><p>表示层</p><p>会话层</p><p>运输层</p><p>网络层</p><p>数据链路层</p><p>物理层</p></blockquote><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>唯一的数据通过网络接口物理移动的层次。所以其他层执行生成报文的功能，这些报文实现各种协议。但是最终，报文必须沿着协议栈向下运输到物理层，并最终通过网络发送出去。</p><h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>数据链路层在概念上分为两个子层，逻辑链路层LLC和媒体访问层MAC。</p><h4 id="LLC"><a href="#LLC" class="headerlink" title="LLC"></a>LLC</h4><p>网络上本地设备之间逻辑链路的建立和控制所需要的功能。</p><h4 id="MAC"><a href="#MAC" class="headerlink" title="MAC"></a>MAC</h4><p>控制对网络媒体访问的程序。</p><h4 id="数据成帧"><a href="#数据成帧" class="headerlink" title="数据成帧"></a>数据成帧</h4><p>将较高层次的报文最终封装成可以在网络物理层发送的帧。</p><h4 id="寻址"><a href="#寻址" class="headerlink" title="寻址"></a>寻址</h4><p>实现对MAC地址的寻址。</p><h4 id="差错检测与处理"><a href="#差错检测与处理" class="headerlink" title="差错检测与处理"></a>差错检测与处理</h4><h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层参与从一台计算机到另一台计算机实际获取数据的最底层。一般而言，数据链路层只处理彼此相邻的本地设备。</p><h4 id="逻辑寻址"><a href="#逻辑寻址" class="headerlink" title="逻辑寻址"></a>逻辑寻址</h4><p>IP协议，尽可能为每一个设备分配一个唯一的逻辑地址。在逻辑层次的寻址；数据链路层是针对物理层的寻址。</p><h4 id="数据报封装"><a href="#数据报封装" class="headerlink" title="数据报封装"></a>数据报封装</h4><h4 id="分片与重组"><a href="#分片与重组" class="headerlink" title="分片与重组"></a>分片与重组</h4><p>如果需要发送的数据太大超过了数据链路层的最大限制，网络层需要将数据划分成片，并把每片交给数据链路层。</p><h4 id="差错处理和诊断"><a href="#差错处理和诊断" class="headerlink" title="差错处理和诊断"></a>差错处理和诊断</h4><p>针对网络层的差错处理和检错</p><h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><p>运输层担当较高层的应用的抽象领域和1-3层具体功能的联络者。</p><p>主要负责端对端的运输。</p><h4 id="进程级寻址"><a href="#进程级寻址" class="headerlink" title="进程级寻址"></a>进程级寻址</h4><p>对端口级别的寻址，寻址需要发送到对方的某个应用程序。</p><h4 id="多路复用和分解"><a href="#多路复用和分解" class="headerlink" title="多路复用和分解"></a>多路复用和分解</h4><h4 id="分片，打包和重组"><a href="#分片，打包和重组" class="headerlink" title="分片，打包和重组"></a>分片，打包和重组</h4><p>对较大报文的分片</p><h4 id="连接建立，管理和终止"><a href="#连接建立，管理和终止" class="headerlink" title="连接建立，管理和终止"></a>连接建立，管理和终止</h4><h4 id="确认和重传"><a href="#确认和重传" class="headerlink" title="确认和重传"></a>确认和重传</h4><p>运输层是实现可靠数据交付协议的地方。最通常的做法就是通过结合确认和重传定时器来实现。</p><h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><h1 id="TCP-IP各层次常用协议"><a href="#TCP-IP各层次常用协议" class="headerlink" title="TCP/IP各层次常用协议"></a>TCP/IP各层次常用协议</h1><table><thead><tr><th>网络接口层</th><th>点到点协议</th><th>PPP</th><th>提供第二层连接。提供鉴别，数据封装，加密和聚合等功能</th></tr></thead><tbody><tr><td></td><td>地址解析协议</td><td>ARP</td><td>将IP地址转换为MAC地址</td></tr><tr><td><strong>网际层</strong></td><td>网际协议</td><td>IP，IPV6</td><td>提供对运输层报文的封装，无连接交付，寻址和选路功能</td></tr><tr><td></td><td>IP网络地址转换</td><td>IP NAT</td><td>将专用网络中的地址自动转换成公用网络中的不同地址</td></tr><tr><td></td><td>互联网控制报文</td><td>ICMP</td><td>IP和IPV6协议的支持协议。一般用于ping命令</td></tr><tr><td><strong>运输层</strong></td><td>传输控制协议</td><td>TCP</td><td>提供可靠连接的协议，具有流量控制功能</td></tr><tr><td></td><td>用户数据报协议</td><td>UDP</td><td>提供无连接协议，效率较高</td></tr><tr><td><strong>应用层</strong></td><td>域名系统</td><td>DNS</td><td>将域名转换为IP地址</td></tr><tr><td></td><td>动态主机配置协议</td><td>DHCP</td><td>用来配置TCP/IP设备并管理IP地址的协议</td></tr><tr><td></td><td>文件传输协议</td><td>FTP</td><td>文件传输，明文形式传送用户名和密码</td></tr><tr><td></td><td>超文本传输协议</td><td>HTTP</td><td></td></tr><tr><td></td><td>TELNET协议</td><td>Telnet</td><td>建立远程机器的终端会话</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;OSI参考模型&quot;&gt;&lt;a href=&quot;#OSI参考模型&quot; class=&quot;headerlink&quot; title=&quot;OSI参考模型&quot;&gt;&lt;/a&gt;OSI参考模型&lt;/h1&gt;&lt;h4 id=&quot;OSI参考模型网络层、子层和层分组&quot;&gt;&lt;a href=&quot;#OSI参考模型网络层、子层和层分
-      
-    
-    </summary>
-    
-    
-      <category term="Net" scheme="https://minug.github.io/tags/Net/"/>
     
   </entry>
   
