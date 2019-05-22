@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .map {
+            width: 800px;
+            height: 600px;
+            background-color: #ccc;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 地图 -->
+    <div class="map">
+
+    </div>
+    <script>
+        // 食物
+        (function() {
+            // 保存食物数组
+            var elements = [];
+            /**
+             * 食物对象构造函数
+             * @param {颜色 rgb} color 
+             * @param {number left} x 
+             * @param {number top} y 
+             * @param {number 宽度} width 
+             * @param {number 高度} height 
+             */
+            function Food(color, x, y, width, height) {
+                // 设置默认值
+                this.color = color || "green";
+                this.x = x || 0;
+                this.y = y || 0;
+                this.width = width || 20;
+                this.height = height || 20;
+
+
+            }
+            // 初始化食物
+            /**
+             * map => 地图
+             */
+            Food.prototype.init = function(map) {
+                // 每次创建前先删除 确保map只有一个食物
+                removeFood();
+
+                // 创建食物
+                let div = document.createElement("div");
+
+                // 将食物追加到地图里面
+                map.appendChild(div)
+
+                // 设置food 样式
+                div.style.width = `${this.width}px`;
+                div.style.height = `${this.height}px`;
+                div.style.backgroundColor = this.color;
+
+                // 脱离文档流才能设置left和top
+                div.style.position = "absolute";
+
+                // 随机产生x和y
+                // 先计算出map里面能摆放多少个food 800/20=>40
+                // 随机产生0-40的随机数 (不包括40 否则food会出去) 然后再乘food width
+                this.x = parseInt(Math.random() * map.offsetWidth / this.width) * this.width;
+                this.y = parseInt(Math.random() * map.offsetHeight / this.height) * this.height;
+
+                div.style.left = `${this.x}px`;
+                div.style.top = `${this.y}px`;
+
+                // 将食物追加到elements数组中 
+                elements.push(div);
+
+            };
+            // 删除食物
+            function removeFood() {
+                for (let i = 0; i < elements.length; i++) {
+                    // 将食物从地图中删除
+                    elements[i].parentNode.removeChild(elements[i]);
+                    // 将食物从数组中删除
+                    elements.splice(i, 1)
+                }
+            };
+
+            // 将食物暴露给window 可以在外部使用
+            window.Food = Food;
+        }(window));
+
+        // 颜色
+        (function() {
+            // 随机颜色构造函数
+            function Color(color) {
+                // 随机颜色
+                this.random = color || "green";
+                // rgb
+                this.colors = [255, 255, 255];
+            }
+            Color.prototype = {
+                constructor: Color,
+                // rgb 拼接
+                // Color.prototype.randomColor
+                randomColor: function() {
+                    this.colorful();
+                    this.random = `rgb(${this.colors[0]},${this.colors[1]},${this.colors[2]})`
+                },
+                // 随机数 0-255
+                colorful: function() {
+                    for (let i = 0; i < this.colors.length; i++) {
+                        this.colors[i] = parseInt(Math.random() * 255)
+                    }
+                }
+            }
+
+            window.Color = Color;
+        }(window));
+
+        // 小蛇
+        (function() {
+            // 保存小蛇数组
+            var elements = [];
+            /**
+             * 小蛇构造函数
+             * @param {number 宽度} width 
+             * @param {number 高度} height 
+             * @param {string 方向} direction 
+             */
+            function Snake(width, height, direction) {
+                this.width = width || 20;
+                this.height = height || 20;
+                this.direction = direction || "right";
+
+                // 小蛇身体
+                // x 是map width/ food width 的比例
+                this.body = [{
+                        x: 3,
+                        y: 2,
+                        color: "red"
+                    }, // 头部
+                    {
+                        x: 2,
+                        y: 2,
+                        color: "yellow"
+                    }, // 身体
+                    {
+                        x: 1,
+                        y: 2,
+                        color: "yellow"
+                    } // 身体
+                ]
+
+            }
+
+            /**
+             * 初始化小蛇
+             * map => 地图
+             */
+            Snake.prototype.init = function(map) {
+                // 先删除已有的小蛇
+                remove();
+                for (let i = 0; i < this.body.length; i++) {
+                    let obj = this.body[i];
+                    let div = document.createElement("div");
+                    map.appendChild(div);
+                    div.style.position = "absolute";
+                    div.style.width = `${this.width}px`;
+                    div.style.height = `${this.height}px`;
+
+
+                    div.style.left = `${obj.x * this.width}px`;
+                    div.style.top = `${obj.y * this.height}px`;
+                    div.style.backgroundColor = obj.color;
+                    // 将小蛇追加到小蛇数组中
+                    elements.push(div);
+                }
+            }
+
+            /**
+             * 小蛇移动
+             * food => 食物
+             * map => 地图
+             */
+            Snake.prototype.move = function(food, map) {
+                // 倒叙 i>0 不处理蛇头
+                for (let i = this.body.length - 1; i > 0; i--) {
+                    this.body[i].x = this.body[i - 1].x;
+                    this.body[i].y = this.body[i - 1].y;
+                }
+
+                // 处理蛇头
+                switch (this.direction) {
+                    case "right":
+                        this.body[0].x += 1;
+                        break;
+                    case "left":
+                        this.body[0].x -= 1;
+                        break;
+                    case "top":
+                        this.body[0].y -= 1;
+                        break;
+                    case "bottom":
+                        this.body[0].y += 1;
+                        break;
+                }
+
+                // 小蛇吃食物
+                // 小蛇头坐标
+                let headX = this.body[0].x * this.width;
+                let headY = this.body[0].y * this.height;
+
+                if (headX == food.x && headY == food.y) { // 吃到食物
+                    let obj = this.body[this.body.length - 1]; // 蛇尾
+                    this.body.push({
+                        x: obj.x,
+                        y: obj.y,
+                        color: obj.color
+                    }); // 追加一个蛇尾
+                    // 删除食物 食物初始化
+                    food.init(map)
+                }
+            }
+
+            // 删除小蛇
+            function remove() {
+                // 倒叙 先从小蛇尾巴开始删除 最后删除蛇头
+                for (let i = elements.length - 1; i >= 0; i--) {
+                    elements[i].parentNode.removeChild(elements[i]);
+                    elements.splice(i, 1)
+                }
+            }
+
+            // 把小蛇暴露给window
+            window.Snake = Snake;
+        }(window));
+
+        // 游戏
+        (function() {
+            function Game(map) {
+                // 实例化
+                this.food = new Food();
+                this.snake = new Snake();
+                this.map = map;
+
+                than = this;
+            };
+            // 游戏初始化 开始游戏
+            Game.prototype.init = function() {
+                // 初始化
+                this.food.init(this.map);
+                this.snake.init(this.map);
+                // 小蛇移动
+                this.runSnake();
+
+                // 监听键盘事件
+                this.bindKey();
+            };
+            // 小蛇移动
+            Game.prototype.runSnake = function() {
+                let timeId = setInterval(function() {
+                        this.snake.move(this.food, this.map);
+                        this.snake.init(this.map);
+
+                        // 判断游戏结束
+                        // 最大值
+                        let maxX = map.offsetWidth / this.snake.width;
+                        let maxY = map.offsetHeight / this.snake.height;
+
+                        // 横坐标
+                        if (this.snake.body[0].x < 0 || this.snake.body[0].x >= maxX) {
+                            clearInterval(timeId);
+                            alert("游戏结束");
+                        }
+                        // 纵坐标
+                        if (this.snake.body[0].y < 0 || this.snake.body[0].y >= maxY) {
+                            clearInterval(timeId);
+                            alert("游戏结束");
+                        }
+                    }.bind(than), 200) // bind 改变this指向 或者直接使用箭头函数  ()=>{}
+            };
+
+            // 键盘方向事件
+            Game.prototype.bindKey = function() {
+                document.addEventListener("keydown", function(e) {
+                    e = e || window.event;
+                    switch (e.keyCode) {
+                        case 37:
+                            this.snake.direction = "left";
+                            break;
+                        case 38:
+                            this.snake.direction = "top";
+                            break;
+                        case 39:
+                            this.snake.direction = "right";
+                            break;
+                        case 40:
+                            this.snake.direction = "bottom";
+                            break;
+                    }
+                }.bind(than))
+            }
+
+
+            window.Game = Game;
+        }(window));
+
+        // 获取地图
+        let map = document.querySelector(".map");
+
+        // 实例化随机颜色
+        let color = new Color();
+        color.randomColor();
+        // color.random => 随机颜色
+
+        // 实例化游戏
+        let game = new Game(map);
+        // 开始游戏
+        game.init();
+
+
+        // // 实例化食物
+        // let food = new Food(color.random);
+        // // 调用食物的初始化
+        // food.init(map);
+
+
+        // // 实例化小蛇
+        // let snake = new Snake();
+        // // 初始化
+        // snake.init(map);
+        // snake.move(food, map);
+        // snake.init(map);
+        // snake.move(food, map);
+        // snake.init(map);
+        // snake.move(food, map);
+        // snake.init(map);
+        // snake.move(food, map);
+        // snake.init(map);
+    </script>
+</body>
+
+</html>
